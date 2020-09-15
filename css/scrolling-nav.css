@@ -10,3 +10,13 @@ header {
 section {
   padding: 150px 0;
 }
+
+.bg-ffablue{
+  background-color: #004c97;
+}
+.bg-ffagold{
+  background-color: #ffcd00;
+}
+.bg-ffared{
+  background-color: #da291c;
+}
