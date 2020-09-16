@@ -20,3 +20,9 @@ section {
 .bg-ffared{
   background-color: #da291c;
 }
+.zoom{
+  transition: transform 0.2s;
+}
+.zoom:hover{
+  transform: scale(1.02);
+}
