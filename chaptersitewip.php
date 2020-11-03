@@ -25,6 +25,64 @@
   <link rel="shortcut icon" href="images/emblem_favicon.png" type="image/x-icon">
   <!--Cookie Notice-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
+  <style>
+    .youtube-player {
+        position: relative;
+        padding-bottom: 56.23%;
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background: #000;
+        margin: 5px;
+    }
+
+    .youtube-player iframe,
+    .youtube-player object,
+    .youtube-player embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        background: transparent;
+    }
+
+    .youtube-player img {
+        bottom: 0;
+        display: block;
+        left: 0;
+        margin: auto;
+        max-width: 100%;
+        width: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        border: none;
+        height: auto;
+        cursor: pointer;
+        -webkit-transition: .4s all;
+        -moz-transition: .4s all;
+        transition: .4s all;
+    }
+
+    .youtube-player img:hover {
+        -webkit-filter: brightness(75%);
+    }
+
+    .youtube-player .play {
+        height: 72px;
+        width: 72px;
+        left: 50%;
+        top: 50%;
+        margin-left: -36px;
+        margin-top: -36px;
+        position: absolute;
+        background: url("//i.imgur.com/TxzC70f.png") no-repeat;
+        cursor: pointer;
+    }
+
+</style>
 </head>
 
 <body id="page-top">
@@ -130,8 +188,8 @@
             </div>
             <p class="lead">
                     <?php
-                    $aboutFile = fopen("aboutUsText.txt","r");
-                    $aboutUsText = fread($aboutFile,filesize("aboutUsText.txt"));
+                    $aboutFile = fopen("data_files/aboutUsText.txt","r");
+                    $aboutUsText = fread($aboutFile,filesize("data_files/aboutUsText.txt"));
                     fclose($aboutFile);
                     $aboutUsText = str_replace("\n", "<br/>", $aboutUsText);
                     echo $aboutUsText;
@@ -219,7 +277,14 @@
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <h2>Shared Documents</h2>
-          <iframe src="https://drive.google.com/embeddedfolderview?id=1HN_rfRhqeXCohLGArZ33A2OhedS8ft9d#list"
+          <!--<iframe src="https://drive.google.com/embeddedfolderview?id=1HN_rfRhqeXCohLGArZ33A2OhedS8ft9d#list"-->
+          <iframe src="<?php
+            $googleDriveEmbedCodeFile = fopen("data_files/googleDriveEmbedCode.txt", "r");
+            $googleDriveString = fread($googleDriveEmbedCodeFile, filesize("data_files/googleDriveEmbedCode.txt"));
+            fclose($googleDriveEmbedCodeFile);
+            $googleDriveArray = explode("|", $googleDriveString);
+            echo "https://drive.google.com/embeddedfolderview?id=" . $googleDriveArray[0] . $googleDriveArray[1]; 
+            ?>"          
             width="100%" height="500" frameborder="0"></iframe>
         </div>
       </div>
@@ -252,7 +317,30 @@
           <div class="container y-5 text-dark">
             <div class="row h-100">
               <!--Paste new officer cards here!-->
-              <div class="col-md-4 mx-auto d-flex">
+            <?php 
+            $officerFile = fopen("data_files/officers.txt", "r");
+            $officerText = fread($officerFile, filesize("data_files/officers.txt"));
+            fclose($officerFile);
+            $officerArray = explode("\n", $officerText);
+            for ($officer = 0; $officer <= sizeof($officerArray) - 2; $officer++) {
+                $currentOfficer=$officerArray[$officer];
+                if ($currentOfficer != ""){
+                    $currentOfficerArray = explode("|", $currentOfficer);
+                    echo "<div class=\"col-md-4 mx-auto d-flex\">
+                <div class=\"card my-5 d-flex zoom d-flex\">
+                  <img class=\"card-img-top\" src=\"images/officers/{$currentOfficerArray[1]}.{$currentOfficerArray[0]}\" alt=\"Officer Photo\">
+                  <div class=\"card-body\">
+                    <h3>{$currentOfficerArray[1]}</h3>
+                    <h5>{$currentOfficerArray[2]}</h5>
+                    <p class=\"card-text px-3\">" . str_replace("NEWLINE", "\n", str_replace("VERTICALSEPARATOR", "|", $currentOfficerArray[3])) . "</p>
+                  </div>
+                  <p></p>
+                </div>
+              </div>";
+                };
+            }
+            ?>
+              <!--<div class="col-md-4 mx-auto d-flex">
                 <div class="card my-5 d-flex zoom d-flex">
                   <img class="card-img-top" src="images/rylan.jpg" alt="Profile Photo">
                   <div class="card-body">
@@ -340,7 +428,7 @@
                   </div>
                   <p></p>
                 </div>
-              </div>
+              </div>-->
             </div>
           </div>
         </div>
@@ -367,7 +455,7 @@
     <div class="container-fluid">
       <h1>Videos</h1>
       <div class="row">
-        <div class="col-lg-5 my-4 mx-auto" style="height: 50vh">
+        <!--<div class="col-lg-5 my-4 mx-auto" style="height: 50vh">
           <iframe height="100%" width="100%" src="https://www.youtube.com/embed/6X8uVDnx37M" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
@@ -379,10 +467,35 @@
           <iframe height="100%" width="100%"
             src="https://drive.google.com/file/d/1HwA9OXCjJ02YlC9fhoBhbzd0CLy5hUo8/preview" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="col-lg-5 my-4 mx-auto" style="height: 50vh">
-
-        </div>
+        </div>-->
+        <?php
+            $videoFile = fopen("data_files/videos.txt", "r");
+            $videoText = fread($videoFile, filesize("data_files/videos.txt"));
+            fclose($videoFile);
+            $videoArray = explode("\n", $videoText);
+            //This is hacky. The list contains newlines, with no actual videos. 
+            //Instead of finding the root of this problem, I'm going to use this
+            //counter as a band-aid.
+            $numberOfRealVideos = 0;
+            for ($video = 0; $video <= sizeof($videoArray) - 2; $video++) {
+                //NAME|TYPE|CONTACT_INFO
+                $currentVideo=$videoArray[$video];
+                if ($currentVideo != ""){
+                    $numberOfRealVideos++;
+                    $currentVideoArray = explode("|", $currentVideo);
+                    $currentVideoArray[1] = str_replace("https://www.youtube.com/watch?v=","",$currentVideoArray[1]);
+                    $currentVideoArray[1] = str_replace("https://youtu.be/","",$currentVideoArray[1]);
+                    
+                    echo "<div class='col-lg-5 my-4 mx-auto' style='height: 50vh'>" . str_replace("VIDEO_ID", $currentVideoArray[1], $currentVideoArray[0]) . "</div>"; 
+                };
+            };
+            //If there is an odd number of videos, 
+            //add an empty column to prevent the last
+            //video from centering.
+            if($numberOfRealVideos % 2 != 0){ 
+                echo "<div class='col-lg-5 my-4 mx-auto' style='height: 50vh'></div>";
+            };
+        ?>
       </div>
     </div>
   </section>
@@ -644,8 +757,16 @@
           <h2>Calendar</h2>
           <p class="lead">Upcoming events for Fairfield FFA</p>
           <iframe
-            src="https://calendar.google.com/calendar/embed?src=fairfield.k12.mt.us_38a61j9d76jd5qomjmdb77g1to%40group.calendar.google.com&ctz=America%2FDenver"
-            style="border:none" width="100%" height="500" frameborder="0" scrolling="no"></iframe>
+src=
+ <?php
+            $calendarEmbedCodeFile = fopen("data_files/calendarEmbedCode.txt", "r");
+            $embedCode = fread($calendarEmbedCodeFile, filesize("data_files/calendarEmbedCode.txt"));
+            fclose($calendarEmbedCodeFile);
+            echo "\"" . $embedCode . "\"";
+            ?>
+style="border:none" width="100%" height="500" frameborder="0" scrolling="no"></iframe>
+
+           
         </div>
       </div>
     </div>
@@ -667,8 +788,8 @@
           <p class="lead">Get in touch with Fairfield FFA:</p>
           <ul>
             <?php 
-            $contactFile = fopen("contactInfoText.txt", "r");
-            $contactText = fread($contactFile, filesize("contactInfoText.txt"));
+            $contactFile = fopen("data_files/contactInfoText.txt", "r");
+            $contactText = fread($contactFile, filesize("data_files/contactInfoText.txt"));
             fclose($contactFile);
             $contactArray = explode("\n", $contactText);
             for ($contact = 0; $contact <= sizeof($contactArray) - 2; $contact++) {
@@ -720,6 +841,61 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/js/swiper.min.js"></script>
   <!--Cookie notice-->
   <script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
+  
+
+<!-- Matomo -->
+<script type="text/javascript">
+var _paq = window._paq = window._paq || [];
+/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+_paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+_paq.push(["setCookieDomain", "*.fairfieldffa.org"]);
+_paq.push(["setDomains", ["*.fairfieldffa.org"]]);
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
+(function() {
+    var u="//jforseth.tech/matomo/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+})();
+</script>
+<!-- End Matomo Code -->
+
+
+  <script>
+    /* Light YouTube Embeds by @labnol */
+
+    /* Web: http://labnol.org/?p=27941 */
+
+    document.addEventListener("DOMContentLoaded",
+        function() {
+            var div, n,
+                v = document.getElementsByClassName("youtube-player");
+            for (n = 0; n < v.length; n++) {
+                div = document.createElement("div");
+                div.setAttribute("data-id", v[n].dataset.id);
+                div.innerHTML = labnolThumb(v[n].dataset.id);
+                div.onclick = labnolIframe;
+                v[n].appendChild(div);
+            }
+        });
+
+    function labnolThumb(id) {
+        var thumb = '<img src="https://i.ytimg.com/vi/ID/hqdefault.jpg">',
+            play = '<div class="play"></div>';
+        return thumb.replace("ID", id) + play;
+    }
+
+    function labnolIframe() {
+        var iframe = document.createElement("iframe");
+        iframe.setAttribute("src", "https://www.youtube.com/embed/" + this.dataset.id + "?autoplay=1");
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute("allowfullscreen", "1");
+        this.parentNode.replaceChild(iframe, this);
+    }
+
+</script>
 </body>
 
 </html>
