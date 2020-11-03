@@ -221,46 +221,31 @@
           <div class="container my-5">
             <div class="row">
               <!--Paste resource code here!-->
-              <div class="col-md-4 mx-auto my-5 d-flex">
-                <div class="card zoom d-flex">
-                  <img class="card-img-top" src="images/aet.jpg" alt="AET Logo">
-                  <div class="d-flex flex-column">
-                    <h3><a class="card-title px-3" href="https://theaet.com">The AET</a></h3>
-                    <p class="card-text px-3">The Ag Experience Tracker is your one stop shop for SAE records, class
-                      records,
-                      and chapter information.</p>
-                  </div>
-                  <a href="https://theaet.com" class="mt-auto mx-auto w-75 btn btn-primary">Open AET</a>
-                  <p></p>
-                </div>
-              </div>
-              <div class="col-md-4 mx-auto my-5 d-flex">
-                <div class="card zoom d-flex">
-                  <img class="card-img-top" src="images/judging_card.png" alt="AET Logo">
-                  <div class="d-flex flex-column">
-                    <h3><a class="card-title px-3" href="https://judgingcard.com">JudgingCard</a></h3>
-                    <p class="card-text px-3">JudgingCard.com has results, placings and score breakdowns for FFA events
-                      and
-                      competitions.</p><br />
-                    <a href="https://judgingcard.com" class="mt-auto mx-auto w-75 btn btn-primary">Open JudgingCard</a>
-                  </div>
-                  <p></p>
-                </div>
-              </div>
-              <div class="col-md-4 mx-auto my-5 d-flex">
-                <div class="card zoom d-flex">
-                  <img class="card-img-top" src="images/mt_ffa.png" alt="Montana FFA Logo">
-                  <div class="d-flex flex-column">
-                    <h3><a class="card-title px-3" href="https://montanaffa.org">MontanaFFA</a></h3>
-                    <p class="card-text px-3">State FFA website. Includes competition information, calendar, and
-                      statewide
-                      information.</p>
-                  </div>
-                  <a href="https://montanaffa.org" class="mt-auto mx-auto w-75 btn btn-primary">Open MontanaFFA</a>
-                  <p></p>
-                </div>
-              </div>
-            </div>
+              <?php
+                $resourceFile = fopen("data_files/resources.txt", "r");
+                $resourceText = fread($resourceFile, filesize("data_files/resources.txt"));
+                fclose($resourceFile);
+                $resourceArray = explode("\n", $resourceText);
+                for ($resource = 0; $resource <= sizeof($resourceArray) - 2; $resource++) {
+                    $currentResource=$resourceArray[$resource];
+                    if ($currentResource != ""){
+                        $currentResourceArray = explode("|", $currentResource);
+                        echo "
+                            <div class=\"col-md-4 mx-auto my-5 d-flex\">
+                                <div class=\"card zoom d-flex\">
+                                <img class=\"card-img-top\" src=\"{$currentResourceArray[0]}\" alt=\"AET Logo\">
+                                <div class=\"d-flex flex-column\">
+                                    <h3><a class=\"card-title px-3\" href=\"{$currentResourceArray[2]}\">{$currentResourceArray[1]}</a></h3>
+                                    <p class=\"card-text px-3\">{$currentResourceArray[3]}</p>
+                                </div>
+                                <a href=\"https://theaet.com\" class=\"mt-auto mx-auto w-75 btn btn-primary\">Open {$currentResourceArray[1]}</a>
+                                <p></p>
+                                </div>
+                            </div>
+                            ";
+                    }
+                }
+              ?>
           </div>
         </div>
       </div>

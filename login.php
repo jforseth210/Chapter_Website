@@ -106,8 +106,8 @@ session_start();
   ) {
 
     if (
-      $_POST['inputEmail'] == 'someone@fairfieldffa.org' &&
-      $_POST['inputPassword'] == 'fairfieldffa'
+      $_POST['inputEmail'] == 'park@fairfieldffa.org' &&
+      $_POST['inputPassword'] == 'parkparkparkpark'
     ) {
       $_SESSION['valid'] = true;
       $_SESSION['timeout'] = time();
