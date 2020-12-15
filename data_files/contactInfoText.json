@@ -1,0 +1,22 @@
+[
+    {
+        "contact_name": "John Park, Advisor:",
+        "contact_type": "mailto:",
+        "contact_info": "jpark@fairfield.k12.mt.us"
+    },
+    {
+        "contact_name": "School Phone:",
+        "contact_type": "tel:",
+        "contact_info": "(406) 467-2528"
+    },
+    {
+        "contact_name": "School Fax:",
+        "contact_type": "fax:",
+        "contact_info": "(406) 467-2554 "
+    },
+    {
+        "contact_name": "School Facebook:",
+        "contact_type": "https:\/\/",
+        "contact_info": "www.facebook.com\/FairfieldEaglesMT\/"
+    }
+]

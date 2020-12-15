@@ -3,16 +3,17 @@ session_start();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-//If the user isn't logged in, 
+//If the user isn't logged in,
 //send them back to the login page.
 if (!$_SESSION['valid']) {
     header("Location: https://fairfieldffa.org/login.php");
     exit();
 };
-require_once("admin_templates/form_submissions.php");
 //Start the file
 echo "<!DOCTYPE html>";
 echo "<html lang=\"en\">";
+
+require_once("file_functions.php");
 
 //Load bootstrap, stylesheets, etc.
 require_once("admin_templates/head.php");
@@ -33,9 +34,13 @@ function echoToConsole($message){
 
 //Navbar and header
 require_once("admin_templates/header.php");
-
 //About page editor
 require_once("admin_templates/about.php");
+//About page editor
+require_once("admin_templates/about_us_image_gallery.php");
+
+//News Section
+require_once("admin_templates/news.php");
 
 //Resource card editor
 require_once("admin_templates/resources.php");
@@ -48,6 +53,9 @@ require_once("admin_templates/officers.php");
 
 //Video editor
 require_once("admin_templates/videos.php");
+
+//Photo editor
+require_once("admin_templates/image_gallery.php");
 
 //Form to replace the Google Calendar link
 require_once("admin_templates/calendar.php");

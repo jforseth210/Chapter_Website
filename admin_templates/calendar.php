@@ -1,3 +1,12 @@
+<?php
+//Form submission
+if (isset($_POST['calendarEmbedSubmit'])) {
+        $calendarEmbedCode = $_POST['calendarEmbedCode'];
+        $aboutFile = fopen("../data/calendarEmbedCode.txt", "w");
+        fwrite($aboutFile, $calendarEmbedCode);
+        fclose($aboutFile);
+}
+?>
 <section id="calendar">
     <div class=container-fluid>
         <div class=row>
@@ -13,11 +22,11 @@
                     <li>If it gets a little too trigger happy, and deletes the tail-end of the URL, it might let you type by pressing each key twice (maybe). If it still doesn't work, temporarily block javascript on this site.</li>
                 </ul>
                 <?php
-                $calendarEmbedCodeFile = fopen("data_files/calendarEmbedCode.txt", "r");
-                $embedCode = fread($calendarEmbedCodeFile, filesize("data_files/calendarEmbedCode.txt"));
+                $calendarEmbedCodeFile = fopen("../data/calendarEmbedCode.txt", "r");
+                $embedCode = fread($calendarEmbedCodeFile, filesize("../data/calendarEmbedCode.txt"));
                 fclose($calendarEmbedCodeFile);
                 ?>
-                <form role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                <form role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "#calendar"; ?>" method="POST">
                     <textarea class=form-control id="calendarEmbedCode" oninput="extractURL();" name="calendarEmbedCode" style="height:200px"><?php echo $embedCode; ?></textarea>
                     <input class="btn btn-primary" name="calendarEmbedSubmit" type=submit value=Submit>
                 </form>
@@ -26,9 +35,9 @@
                         var userInput = document.getElementById("calendarEmbedCode").value;
                         try {
                             var url = userInput.match(/\bhttps?:\/\/\S+/gi)[0];
-                            //Closing " gets picked up by the regex. Remove it. 
+                            //Closing " gets picked up by the regex. Remove it.
                             url = url.substring(0, url.length - 1);
-                            // Add a short wait, to make it clear that the original data WAS pasted in correctly. 
+                            // Add a short wait, to make it clear that the original data WAS pasted in correctly.
                             // Otherwise it looks like nothing happened
                             setTimeout(function() {
                                 document.getElementById("calendarEmbedCode").value = url;

@@ -1,89 +1,86 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<HTML><HEAD>
-<TITLE>401 Authorization Required</TITLE>
-</HEAD><BODY>
-<H1>Authorization Required</H1>
-This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g., bad password), or your browser doesn't understand how to supply the credentials required.
-<HR>
-<I><!--#echo var="HTTP_HOST" --></I>
-</BODY></HTML>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <meta name="description" content="Website for the Fairfield FFA Chapter.">
+ <meta name="author" content="Justin Forseth">
+ <!--The title at the top of the tab.-->
+ <title>401 Bad Credentials</title>
+
+ <!-- Bootstrap core CSS -->
+ <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+ <!-- Custom styles for this template -->
+ <link href="css/scrolling-nav.css" rel="stylesheet">
+<style>
+.wrapper {
+   min-height: calc(100vh - 100px);
+}
+footer {
+   height: 100px;
+}
+</style>
+</head>
+
+<body id="page-top">
+
+ <!-- Links and stuff at the top of the page -->
+ <nav class="navbar navbar-expand-lg navbar-dark bg-ffablue fixed-top" id="mainNav">
+   <div class="container">
+     <img src="images/emblem.png" class="mx-1" style="height:32px"></img>
+     <a class="navbar-brand js-scroll-trigger" href="index.php">Fairfield FFA</a>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbarResponsive">
+       <ul class="navbar-nav ml-auto">
+       </ul>
+     </div>
+   </div>
+ </nav>
+
+ <header class="wrapper bg-ffablue text-white">
+   <div class="container text-center">
+     <h1>401 Bad Credentials</h1>
+       <p class="lead">Uh oh! Looks like you forgot to prop the door open when you left. You're locked out of <!--#echo var="REQUEST_URI" -->. If you're not supposed to be on this page, don't be. If you are, make sure you're logged in.</p>
+   </div>
+ </header>
+ <!-- Footer -->
+ <footer class="py-5 bg-ffablue">
+   <div class="container">
+     <p class="m-0 text-center text-white">Copyright &copy; Fairfield FFA 2020.</p>
+     <p class="m-0 text-center text-white">Template by startbootstrap.com.</p>
+     <p class="m-0 text-center text-white">Designed by Justin Forseth.</p>
+     <!--<p class="m-0 text-center text-white"><a href="admin_console.php">Login</a> to access admin page.</p>-->
+   </div>
+   <!-- /.container -->
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Matomo -->
+<script type="text/javascript">
+var _paq = window._paq = window._paq || [];
+/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+_paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+_paq.push(["setCookieDomain", "*.fairfieldffa.org"]);
+_paq.push(["setDomains", ["*.fairfieldffa.org"]]);
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
+(function() {
+   var u="//jforseth.tech/matomo/";
+   _paq.push(['setTrackerUrl', u+'matomo.php']);
+   _paq.push(['setSiteId', '2']);
+   var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+   g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+})();
+</script>
+<!-- End Matomo Code -->
+</body>
+
+</html>

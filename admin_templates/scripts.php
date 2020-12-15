@@ -47,20 +47,59 @@
             case "contactTable":
                 idPrefix = "contactInfo";
                 break;
+            case "newsCards":
+                idPrefix = "news";
+                break;
+            case "aboutUsPhotoCards":
+                idPrefix = "aboutUsPhoto";
         }
         var contactTable = document.getElementById(tableId);
         var newContact = contactTable.lastElementChild.cloneNode(true);
         var erasableInputs = newContact.getElementsByClassName("erasable-value");
+        var freshIds = newContact.getElementsByClassName("fresh-id");
+        var freshFors = newContact.getElementsByClassName("fresh-for");
+        var rowNumFields = newContact.getElementsByClassName("row_num");
+        var newRowNum = contactTable.children.length;
+        var images = newContact.getElementsByTagName("img");
+
         newContact.getElementsByClassName("submit-button")[0].name = idPrefix + "NewSubmit";
         newContact.getElementsByClassName("submit-button")[0].id = idPrefix + "NewSubmit";
         newContact.getElementsByClassName("submit-button")[0].setAttribute("form", "new" + idPrefix + "Form");
         newContact.getElementsByClassName("submit-button")[0].value = "Add";
         newContact.getElementsByTagName("form")[0].id = "new" + idPrefix + "Form";
+
+
+       for (var i = 0; i < rowNumFields.length; i++) {
+            rowNumFields[i].id = newRowNum;
+        }
+
+        console.log("Javascript is a stupid programming language.");
+        console.log(freshFors);
+
+        //This is buggy and hacky and bad,
+        //but I can't think of another way
+        //to do it.
+        for (var i = 0; i < freshIds.length; i++) {
+             freshIds[i].id = "addnew";
+
+        }
+        for (var i = 0; i < images.length; i++) {
+             images[i].src = "https://www.lifewire.com/thmb/2KYEaloqH6P4xz3c9Ot2GlPLuds=/1920x1080/smart/filters:no_upscale()/cloud-upload-a30f385a928e44e199a62210d578375a.jpg";
+
+        }
+        for (var i = 0; i < freshIds.length; i++) {
+             freshIds[i].id = "addnew";
+
+        }
+        for (var i = 0; i < freshFors.length; i++) {
+              freshFors[i].setAttribute("for","addnew");
+        }
+
         for (var i = 0; i < erasableInputs.length; i++) {
             erasableInputs[i].value = "";
             erasableInputs[i].setAttribute("form", "new" + idPrefix + "Form");
         }
-        contactTable.appendChild(newContact)
+        contactTable.appendChild(newContact);
 
     }
 </script>

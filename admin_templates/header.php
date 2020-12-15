@@ -2,13 +2,17 @@
     <div class="container">
         <img src="images/emblem.png" class="mx-1" style="height:32px"></img>
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Fairfield FFA</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#news">News</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#resources">Resources</a>
@@ -37,7 +41,7 @@
             </ul>
         </div>
     </div>
-</nav> 
+</nav>
 <header class="bg-ffablue text-white">
     <div class="container text-center">
         <h1>Administrator Tools</h1>

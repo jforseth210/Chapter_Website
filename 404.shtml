@@ -7,7 +7,7 @@
   <meta name="description" content="Website for the Fairfield FFA Chapter.">
   <meta name="author" content="Justin Forseth">
   <!--The title at the top of the tab.-->
-  <title>Fairfield FFA</title>
+  <title>404 Not Found</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -61,7 +61,7 @@ footer {
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  
+
 <!-- Matomo -->
 <script type="text/javascript">
 var _paq = window._paq = window._paq || [];
