@@ -67,10 +67,10 @@ if (isset($_POST['resourceMoveSubmit'])) {
                                         <br />
                                         <div class=\"card-body\">
                                         <form role='form' id=\"resources$resource\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#resources" . "' method=\"POST\">
-                                            <h3><input form=\"resources$resource\" name=\"resourceImageURL\" class=\"erasable-value form-control\" value=\"{$currentResource["resource_image_url"]}\" /></h3>
-                                            <h5><input form=\"resources$resource\" name=\"resourceName\" class=\"erasable-value form-control\" value=\"{$currentResource["resource_name"]}\" /></h5>
-                                            <h5><input form=\"resources$resource\" name=\"resourceURL\" class=\"erasable-value form-control\" value=\"{$currentResource["resource_url"]}\" /></h5>
-                                            <textArea form=\"resources$resource\" style=\"height:200px !important\"name=\"resourceBody\" class=\"erasable-value form-control\">" . $currentResource["resource_body"] . "</textarea>
+                                            <h3><input form=\"resources$resource\" name=\"resourceImageURL\" class=\"erasable-value form-control\" value=\"{$currentResource["resource_image_url"]}\" placeholder=\"Image URL\"/></h3>
+                                            <h5><input form=\"resources$resource\" name=\"resourceName\" class=\"erasable-value form-control\" value=\"{$currentResource["resource_name"]}\" placeholder=\"Name\" /></h5>
+                                            <h5><input form=\"resources$resource\" name=\"resourceURL\" class=\"erasable-value form-control\" value=\"{$currentResource["resource_url"]}\" placeholder=\"Resource URL\" /></h5>
+                                            <textArea form=\"resources$resource\" style=\"height:200px !important\"name=\"resourceBody\" class=\"erasable-value form-control\" placeholder=\"Description\">" . $currentResource["resource_body"] . "</textarea>
 
                                             <br />
                                             <input hidden name=row_num form=\"resources$resource\" value=\"$resource\">
@@ -80,21 +80,21 @@ if (isset($_POST['resourceMoveSubmit'])) {
 
                                             <div role=\"group\" class=\"btn-group mx-auto mt-auto\">
                                                 <form role='form' id=\"" . "resources" . $resource . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#resources" . "' method=\" POST\">
-                                                    <input class=\"btn btn-danger mx-auto\" type=submit name=\"resourceDeleteSubmit\" value=\"Delete\" />
+                                                    <input class=\"new-disable btn btn-danger mx-auto\" type=submit name=\"resourceDeleteSubmit\" value=\"Delete\" />
                                                 </form>
-                                                <input form=\"resources$resource\" class=\"btn btn-primary submit-button mx-auto\" type=submit name=\"resourceUpdateSubmit\" value=\"Update Resource\" />
-                                                <button type=\"button\" class=\"btn btn-success mx-auto\" onclick=\"newRow('resourceCards',$resource);\">New</button>
+                                                <input form=\"resources$resource\" class=\"btn btn-primary submit-button mx-auto\" type=submit name=\"resourceUpdateSubmit\" value=\"Save\" />
+                                                <button type=\"button\" class=\"new-disable btn btn-success mx-auto\" onclick=\"newRow('resourceCards',$resource);\">New</button>
                                             </div>
 
                                             <form style=\"display:inline;\" role='form' id=\"resources" . $resource . "MoveUp\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#resources" . "' method=\"POST\">
-                                              <button class=\"btn btn-secondary\" type=submit name=\"resourceMoveSubmit\">
+                                              <button class=\"new-disable btn btn-secondary\" type=submit name=\"resourceMoveSubmit\">
                                                 Move Up
                                               </button>
                                               <input hidden name=\"direction\" value=\"up\"/>
                                             </form>
 
                                             <form class=mx-0 style=\"display:inline;\" role='form' id=\"resources" . $resource . "MoveDown\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#resources" . "' method=\"POST\">
-                                              <button class=\"btn btn-secondary \" type=submit name=\"resourceMoveSubmit\">
+                                              <button class=\"new-disable btn btn-secondary \" type=submit name=\"resourceMoveSubmit\">
                                                 Move Down
                                               </button>
                                               <input hidden name=\"direction\" value=\"down\"/>

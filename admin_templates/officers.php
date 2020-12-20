@@ -8,8 +8,9 @@ if (isset($_POST['officerNewSubmit'])) {
 
     $officerArray = array(
         "officer_title" => $officerTitle,
-        "officer_name" => $offierName,
-        "officer_bio" => $officerBio
+        "officer_name" => $officerName,
+        "officer_bio" => $officerBio,
+        "officer_image_ext" => "Image not yet uploaded"
     );
 
     addNewRowJSON($officerArray, "officers.json");
@@ -65,8 +66,8 @@ if (isset($_POST["officerImageSubmit"])) {
     $officerTitle = $officerArray[$rowToRead]['officer_title'];
     $imageFileType = strtolower(pathinfo($officerImage["name"], PATHINFO_EXTENSION));
 
-    $officerArray['officer_image'] = $imageFileType;
-    updateRowJSON($rowToRead, $officerArray, "officers.json");
+    $officerArray[$rowToRead]['officer_image_ext'] = $imageFileType;
+    updateRowJSON($rowToRead, $officerArray[$rowToRead], "officers.json");
 
     //Save as images/officers/nameOfOffice.fileExtension
     $target_dir = "images/officers/";
@@ -128,11 +129,11 @@ if (isset($_POST["officerImageSubmit"])) {
                         echo "
                                 <div class=\"col-md-4 d-flex\">
                                     <div class=\"card mx-auto w-100 my-5 d-flex zoom\">
-                                            <img class=\"card-img-top\" src=\"images/officers/{$currentOfficer["officer_title"]}.{$currentOfficer["officer_image_ext"]}\">
+                                            <img id=\"officerImage$officer\" class=\"fresh-id fresh-for card-img-top\" src=\"images/officers/{$currentOfficer["officer_title"]}.{$currentOfficer["officer_image_ext"]}\">
                                             <form role='form' id=\"officers$officer" . "imagechange" . "\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#officers" . "' method=\"POST\" enctype=\"multipart/form-data\">
                                             <div class=\"custom-file\">
-                                                <input type=\"file\" name=\"officerImage\" class=\"form-control-file\" id=\"officerCustomFile$officer\">
-                                                <label class=\"custom-file-label\" for=\"officerCustomFile$officer\">Choose file</label>
+                                                <input type=\"file\" name=\"officerImage\" class=\"fresh-id new-load-file-function form-control-file\" id=\"officerCustomFile$officer\" onchange=\"loadFile(event, 'officerImage$officer')\">
+                                                <label class=\"custom-file-label fresh-for\" for=\"officerCustomFile$officer\">Choose file</label>
                                             </div>
 
                                             <input hidden name=row_num form=\"officers$officer" . "imagechange" . "\" value=\"$officer\">
@@ -143,10 +144,10 @@ if (isset($_POST["officerImageSubmit"])) {
                                             <br />
                                             <div class=\"card-body\">
                                             <form role='form' id=\"officers$officer\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#officers" . "' method=\"POST\">
-                                                <h3><input form=\"officers$officer\" name=\"officerTitle\" class=\"erasable-value form-control\" value=\"{$currentOfficer["officer_title"]}\" /></h3>
-                                                <h5><input form=\"officers$officer\" name=\"officerName\" class=\"erasable-value form-control\" value=\"{$currentOfficer["officer_name"]}\" /></h5>
+                                                <h3><input form=\"officers$officer\" name=\"officerTitle\" class=\"erasable-value form-control\" value=\"{$currentOfficer["officer_title"]}\" placeholder=\"Title\"/></h3>
+                                                <h5><input form=\"officers$officer\" name=\"officerName\" class=\"erasable-value form-control\" value=\"{$currentOfficer["officer_name"]}\" placeholder=\"Name\"/></h5>
 
-                                                <textArea form=\"officers$officer\" style=\"height:200px !important\"name=\"officerBio\" class=\"erasable-value form-control\">" . str_replace("NEWLINE", "\n", str_replace("VERTICALSEPARATOR", "|", $currentOfficer["officer_bio"])) . "</textarea>
+                                                <textArea form=\"officers$officer\" style=\"height:200px !important\"name=\"officerBio\" class=\"erasable-value form-control\" placeholder=\"Bio\">" . str_replace("NEWLINE", "\n", str_replace("VERTICALSEPARATOR", "|", $currentOfficer["officer_bio"])) . "</textarea>
 
                                                 <br />
                                                 <input hidden name=row_num form=\"officers$officer\" value=\"$officer\">
@@ -154,20 +155,20 @@ if (isset($_POST["officerImageSubmit"])) {
                                                 <div class=\"mt-auto\">
                                                 <div role=\"group\" class=\"btn-group mx-auto mt-auto\">
                                                     <form role='form' id=\"" . "officers" . $officer . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#officers" . "' method=\" POST\">
-                                                        <input class=\"btn btn-danger mx-auto\" type=submit name=\"officerDeleteSubmit\" value=\"Delete\" />
+                                                        <input class=\"new-disable btn btn-danger mx-auto\" type=submit name=\"officerDeleteSubmit\" value=\"Delete\" />
                                                     </form>
-                                                    <input form=\"officers$officer\" class=\"btn btn-primary submit-button mx-auto\" type=submit name=\"officerUpdateSubmit\" value=\"Update Profile\" />
-                                                    <button type=\"button\" class=\"btn btn-success mx-auto\" onclick=\"newRow('officerCards',$officer);\">New</button>
+                                                    <input form=\"officers$officer\" class=\"btn btn-primary submit-button mx-auto\" type=submit name=\"officerUpdateSubmit\" value=\"Save\" />
+                                                    <button type=\"button\" class=\"new-disable btn btn-success mx-auto\" onclick=\"newRow('officerCards',$officer);\">New</button>
                                                 </div>
                                                 <form style=\"display:inline;\" role='form' id=\"officers" . $officer . "MoveUp\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#officers" . "' method=\"POST\">
-                                                  <button class=\"btn btn-secondary\" type=submit name=\"officerMoveSubmit\">
+                                                  <button class=\"new-disable btn btn-secondary\" type=submit name=\"officerMoveSubmit\">
                                                     Move Up
                                                   </button>
                                                   <input hidden name=\"direction\" value=\"up\"/>
                                                 </form>
 
                                                 <form class=mx-0 style=\"display:inline;\" role='form' id=\"officers" . $officer . "MoveDown\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#officers" . "' method=\"POST\">
-                                                  <button class=\"btn btn-secondary \" type=submit name=\"officerMoveSubmit\">
+                                                  <button class=\"new-disable btn btn-secondary \" type=submit name=\"officerMoveSubmit\">
                                                     Move Down
                                                   </button>
                                                   <input hidden name=\"direction\" value=\"down\"/>

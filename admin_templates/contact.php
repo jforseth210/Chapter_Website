@@ -77,7 +77,7 @@ if (isset($_POST['contactInfoMoveSubmit'])) {
                         <th>Contact:</th>
                         <th>Add/Remove</th>
                         <th>Reorder</th>
-                        <th>Update</th>
+                        <th>Save</th>
                         <tr />
                     </thead>
                     <tbody id="contactTable">
@@ -112,14 +112,14 @@ if (isset($_POST['contactInfoMoveSubmit'])) {
                                     <input name=\"contactInfo\" form=\"contact$contact\" class=\"erasable-value form-control\" value=\"{$currentContactArray["contact_info"]}\" />
                                 </td>
                                 <td>
-                                    <button type=\"button\" class=\"btn btn-success\" onclick=\"newRow('contactTable',$contact);\">+</button>
+                                    <button type=\"button\" class=\"new-disable btn btn-success\" onclick=\"newRow('contactTable',$contact);\">+</button>
                                     <form role='form' id=\"contact" . $contact . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#contact" . "' method=\"POST\">
-                                    <input class=\"btn btn-danger\" type=submit name=\"contactInfoDeleteSubmit\" value=\"-\"/>
+                                    <input class=\"new-disable btn btn-danger\" type=submit name=\"contactInfoDeleteSubmit\" value=\"-\"/>
                                     </form>
                                 </td>
                                 <td width=\"120px\">
                                   <form style=\"width:45px !important; display:inline;\" role='form' id=\"contact" . $contact . "MoveUp\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#contact" . "' method=\"POST\">
-                                    <button class=\"btn btn-secondary\" type=submit name=\"contactInfoMoveSubmit\">
+                                    <button class=\"new-disable btn btn-secondary\" type=submit name=\"contactInfoMoveSubmit\">
                                       <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrow-up\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">
                                       <path fill-rule=\"evenodd\" d=\"M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z\"/>
                                       </svg>
@@ -128,7 +128,7 @@ if (isset($_POST['contactInfoMoveSubmit'])) {
                                   </form>
 
                                   <form class=mx-0 style=\"width:45px !important; display:inline;\" role='form' id=\"contact" . $contact . "MoveDown\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#contact" . "' method=\"POST\">
-                                    <button class=\"btn btn-secondary \" type=submit name=\"contactInfoMoveSubmit\">
+                                    <button class=\"new-disable btn btn-secondary \" type=submit name=\"contactInfoMoveSubmit\">
                                     <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrow-down\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">
                                       <path fill-rule=\"evenodd\" d=\"M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z\"/>
                                     </svg>
@@ -141,7 +141,7 @@ if (isset($_POST['contactInfoMoveSubmit'])) {
                                 <input hidden name=row_num form=\"contact" . $contact . "MoveUp\" value=\"$contact\">
                                 <input hidden name=row_num form=\"contact" . $contact . "MoveDown\" value=\"$contact\">
                                 <td>
-                                    <input form=\"contact$contact\" class=\"btn btn-primary submit-button\" type=submit name=\"contactInfoUpdateSubmit\" value=\"Update\"/>
+                                    <input form=\"contact$contact\" class=\"btn btn-primary submit-button\" type=submit name=\"contactInfoUpdateSubmit\" value=\"Save\"/>
                                 </td>
                               </form>
                             </tr>";

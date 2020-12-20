@@ -67,21 +67,21 @@ if (isset($_POST['newsMoveSubmit'])) {
 
                                             <div role=\"group\" class=\"btn-group mx-auto mt-auto\">
                                                 <form role='form' id=\"" . "news" . $news . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#news" . "' method=\" POST\">
-                                                    <input class=\"btn btn-danger mx-auto\" type=submit name=\"newsDeleteSubmit\" value=\"Delete\" />
+                                                    <input class=\"new-disable btn btn-danger mx-auto\" type=submit name=\"newsDeleteSubmit\" value=\"Delete\" />
                                                 </form>
-                                                <input form=\"news$news\" class=\"btn btn-primary submit-button mx-auto\" type=submit name=\"newsUpdateSubmit\" value=\"Update news\" />
-                                                <button type=\"button\" class=\"btn btn-success mx-auto\" onclick=\"newRow('newsCards',$news);\">New</button>
+                                                <input form=\"news$news\" class=\"btn btn-primary submit-button mx-auto\" type=submit name=\"newsUpdateSubmit\" value=\"Save\" />
+                                                <button type=\"button\" class=\"new-disable btn btn-success mx-auto\" onclick=\"newRow('newsCards',$news);\">New</button>
                                             </div>
 
                                             <form style=\"display:inline;\" role='form' id=\"news" . $news . "MoveUp\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#news" . "' method=\"POST\">
-                                              <button class=\"btn btn-secondary\" type=submit name=\"newsMoveSubmit\">
+                                              <button class=\"new-disable btn btn-secondary\" type=submit name=\"newsMoveSubmit\">
                                                 Move Up
                                               </button>
                                               <input hidden name=\"direction\" value=\"up\"/>
                                             </form>
 
                                             <form class=mx-0 style=\"display:inline;\" role='form' id=\"news" . $news . "MoveDown\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#news" . "' method=\"POST\">
-                                              <button class=\"btn btn-secondary \" type=submit name=\"newsMoveSubmit\">
+                                              <button class=\"new-disable btn btn-secondary \" type=submit name=\"newsMoveSubmit\">
                                                 Move Down
                                               </button>
                                               <input hidden name=\"direction\" value=\"down\"/>

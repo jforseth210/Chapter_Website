@@ -71,7 +71,7 @@ if (isset($_POST['videoMoveSubmit'])) {
                             <th>Link</th>
                             <th>Add/Remove</th>
                             <th>Reorder</th>
-                            <th>Update</th>
+                            <th>Save</th>
                         </tr>
                     </thead>
                     <tbody id="videoTable">
@@ -107,14 +107,14 @@ if (isset($_POST['videoMoveSubmit'])) {
                                         <input form=\"videos$video\" name=\"videoURL\" class=\"erasable-value form-control\" value=\"{$currentVideoArray['video_url']}\" />
                                     </td>
                                     <td>
-                                        <button type=\"button\" class=\"btn btn-success\" onclick=\"newRow('videoTable',$video);\">+</button>
+                                        <button type=\"button\" class=\"new-disable btn btn-success\" onclick=\"newRow('videoTable',$video);\">+</button>
                                         <form role='form' id=\"" . "videos" . $video . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#videos" . "' method=\"POST\">
-                                            <input class=\"btn btn-danger\" type=submit name=\"videoDeleteSubmit\" value=\"-\"/>
+                                            <input class=\"new-disable btn btn-danger\" type=submit name=\"videoDeleteSubmit\" value=\"-\"/>
                                         </form>
                                     </td>
                                     <td width=\"120px\">
                                       <form style=\"width:45px !important; display:inline;\" role='form' id=\"videos" . $video . "MoveUp\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#videos" . "' method=\"POST\">
-                                        <button class=\"btn btn-secondary\" type=submit name=\"videoMoveSubmit\">
+                                        <button class=\"new-disable btn btn-secondary\" type=submit name=\"videoMoveSubmit\">
                                           <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrow-up\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">
                                           <path fill-rule=\"evenodd\" d=\"M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z\"/>
                                           </svg>
@@ -123,7 +123,7 @@ if (isset($_POST['videoMoveSubmit'])) {
                                       </form>
 
                                       <form class=mx-0 style=\"width:45px !important; display:inline;\" role='form' id=\"videos" . $video . "MoveDown\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#videos" . "' method=\"POST\">
-                                        <button class=\"btn btn-secondary \" type=submit name=\"videoMoveSubmit\" >
+                                        <button class=\"new-disable btn btn-secondary \" type=submit name=\"videoMoveSubmit\" >
                                         <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrow-down\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">
                                           <path fill-rule=\"evenodd\" d=\"M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z\"/>
                                         </svg>
@@ -136,7 +136,7 @@ if (isset($_POST['videoMoveSubmit'])) {
                                     <input hidden name=row_num form=\"videos" . $video . "MoveUp\" value=\"$video\">
                                     <input hidden name=row_num form=\"videos" . $video . "MoveDown\" value=\"$video\">
                                     <td>
-                                        <input form=\"videos$video\" class=\"btn btn-primary submit-button\" type=submit name=\"videoUpdateSubmit\" value=\"Update\"/>
+                                        <input form=\"videos$video\" class=\"btn btn-primary submit-button\" type=submit name=\"videoUpdateSubmit\" value=\"Save\"/>
                                     </td>
                                 </form>
                             </tr>";

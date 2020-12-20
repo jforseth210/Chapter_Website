@@ -50,7 +50,7 @@ function savePhoto($photo, $target_file){
 
   // Allow certain file formats
   $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-  echo $imageFileType;
+  $imageFileType = strtolower($imageFileType);
   if (
       $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
       && $imageFileType != "gif"
@@ -88,10 +88,10 @@ function savePhoto($photo, $target_file){
                       echo "
                               <div class=\"col-md-4 d-flex\">
                                   <div class=\"card mx-auto w-100 my-5 d-flex zoom\">
-                                          <img class=\"card-img-top\" src=\"{$currentAboutUsPhoto["path"]}\">
+                                          <img id=\"aboutUsPhoto$aboutUsPhoto\" class=\"fresh-id fresh-for card-img-top\" src=\"{$currentAboutUsPhoto["path"]}\">
                                           <form role='form' id=\"aboutUsPhotos$aboutUsPhoto" . "imagechange" . "\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#aboutUsPhotos" . "' method=\"POST\" enctype=\"multipart/form-data\">
                                           <div class=\"custom-file\">
-                                              <input type=\"file\" name=\"photo\" class=\"fresh-id form-control-file\" id=\"customAboutUsPhoto$aboutUsPhoto\">
+                                              <input type=\"file\" name=\"photo\" class=\"new-load-file-function fresh-id form-control-file\" id=\"customAboutUsPhoto$aboutUsPhoto\" onchange=\"loadFile(event, 'aboutUsPhoto$aboutUsPhoto')\">
                                               <label class=\"fresh-for custom-file-label\" for=\"customAboutUsPhoto$aboutUsPhoto\">Choose file</label>
                                           </div>
 
@@ -99,7 +99,7 @@ function savePhoto($photo, $target_file){
                                           <input hidden name=row_num form=\"aboutUsPhotos" . $aboutUsPhoto . "MoveUp\" value=\"$aboutUsPhoto\">
                                           <input hidden name=row_num form=\"aboutUsPhotos" . $aboutUsPhoto . "MoveDown\" value=\"$aboutUsPhoto\">
 
-                                          <input name=\"photoSubmit\" type=\"submit\" value=\"Upload New Picture\" class=\"submit-button btn btn-primary w-100\"/>
+                                          <input name=\"photoSubmit\" type=\"submit\" value=\"Save\" class=\"submit-button btn btn-primary w-100\"/>
                                           </form>
                                           <br />
                                           <div class=\"card-body\">
@@ -109,19 +109,19 @@ function savePhoto($photo, $target_file){
                                               <div class=\"mt-auto\">
                                               <div role=\"group\" class=\"btn-group mx-auto mt-auto\">
                                                 <form style=\"display:inline;\" role='form' id=\"aboutUsPhotos" . $aboutUsPhoto . "MoveUp\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#aboutUsPhotos" . "' method=\"POST\">
-                                                  <button class=\"btn btn-secondary\" type=submit name=\"aboutUsPhotoMoveSubmit\">
+                                                  <button class=\"new-disable btn btn-secondary\" type=submit name=\"aboutUsPhotoMoveSubmit\">
                                                   Move Up
                                                   </button>
                                                   <input hidden name=\"direction\" value=\"up\"/>
                                                 </form>
                                                     <form role='form' id=\"" . "aboutUsPhoto" . $aboutUsPhoto . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#aboutUsPhotos" . "' method=\"POST\">
-                                                        <input form=\"" . "aboutUsPhoto" . $aboutUsPhoto . "Delete\" class=\"btn btn-danger mx-auto\" type=submit name=\"aboutUsPhotoDeleteSubmit\" value=\"Delete\" />
+                                                        <input form=\"" . "aboutUsPhoto" . $aboutUsPhoto . "Delete\" class=\"new-disable btn btn-danger mx-auto\" type=submit name=\"aboutUsPhotoDeleteSubmit\" value=\"Delete\" />
                                                     </form>
 
-                                                    <button type=\"button\" class=\"btn btn-success mx-auto\" onclick=\"newRow('aboutUsPhotoCards',$aboutUsPhoto);\">New</button>
+                                                    <button type=\"button\" class=\"new-disable btn btn-success mx-auto\" onclick=\"newRow('aboutUsPhotoCards',$aboutUsPhoto);\">New</button>
 
                                                 <form class=mx-0 style=\"display:inline;\" role='form' id=\"aboutUsPhotos" . $aboutUsPhoto . "MoveDown\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#aboutUsPhotos" . "' method=\"POST\">
-                                                  <button class=\"btn btn-secondary \" type=submit name=\"aboutUsPhotoMoveSubmit\" >
+                                                  <button class=\"new-disable btn btn-secondary \" type=submit name=\"aboutUsPhotoMoveSubmit\" >
                                                     Move Down
                                                   </button>
                                                   <input hidden name=\"direction\" value=\"down\"/>
