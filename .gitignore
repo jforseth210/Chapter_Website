@@ -2,3 +2,6 @@ node_modules
 *.txt
 phpunit
 images
+tests/log.txsdfinclude_once
+tests/.phpunit.result.cache
+tests/phpunit-9.5.phar
