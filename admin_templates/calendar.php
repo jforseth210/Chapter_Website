@@ -19,7 +19,7 @@ if (isset($_POST['calendarEmbedSubmit'])) {
                     <li>Click "Integrate calendar"</li>
                     <li>Copy/paste the embed code into the box below</li>
                     <li>It will automatically extract the calendar url. Click submit.</li>
-                    <li>If it gets a little too trigger happy, and deletes the tail-end of the URL, it might let you type by pressing each key twice (maybe). If it still doesn't work, temporarily block javascript on this site.</li>
+                    <li>If it doesn't work, check that the end of the URL didn't get cut off.</li>
                 </ul>
                 <?php
                 $calendarEmbedCodeFile = fopen("../data/calendarEmbedCode.txt", "r");
@@ -27,7 +27,7 @@ if (isset($_POST['calendarEmbedSubmit'])) {
                 fclose($calendarEmbedCodeFile);
                 ?>
                 <form role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "#calendar"; ?>" method="POST">
-                    <textarea class=form-control id="calendarEmbedCode" oninput="extractURL();" name="calendarEmbedCode" style="height:200px"><?php echo $embedCode; ?></textarea>
+                    <textarea class=form-control id="calendarEmbedCode" onpaste="extractURL();" name="calendarEmbedCode" style="height:200px"><?php echo $embedCode; ?></textarea>
                     <input class="btn btn-primary" name="calendarEmbedSubmit" type=submit value=Submit>
                 </form>
                 <script>
@@ -35,13 +35,12 @@ if (isset($_POST['calendarEmbedSubmit'])) {
                         var userInput = document.getElementById("calendarEmbedCode").value;
                         try {
                             var url = userInput.match(/\bhttps?:\/\/\S+/gi)[0];
-                            //Closing " gets picked up by the regex. Remove it.
-                            url = url.substring(0, url.length - 1);
+                            
                             // Add a short wait, to make it clear that the original data WAS pasted in correctly.
                             // Otherwise it looks like nothing happened
                             setTimeout(function() {
                                 document.getElementById("calendarEmbedCode").value = url;
-                            }, 500);
+                            }, 250);
                         } catch (TypeError) {
                             //There is no URL in the textbox.
                         }
