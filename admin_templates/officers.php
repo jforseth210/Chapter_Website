@@ -72,45 +72,7 @@ if (isset($_POST["officerImageSubmit"])) {
     //Save as images/officers/nameOfOffice.fileExtension
     $target_dir = "images/officers/";
     $target_file = $target_dir . basename($officerTitle . "." . $imageFileType);
-    $uploadOk = 1;
-
-    // Check if image file is a actual image or fake image
-    if (isset($_POST["submit"])) {
-        $check = getimagesize($officerImage["tmp_name"]);
-        if ($check !== false) {
-            echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
-        } else {
-            echo "File is not an image.";
-            $uploadOk = 0;
-        }
-    }
-    // Check file size
-    /*if ($officerImage["size"] > 500000) {
-    echo "Sorry, your file is too large.";
-    $uploadOk = 0;
-    }*/
-
-    // Allow certain file formats
-    if (
-        $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif"
-    ) {
-        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-    }
-
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
-    } else {
-        if (move_uploaded_file($officerImage["tmp_name"], $target_file)) {
-            echo "The file " . htmlspecialchars(basename($officerImage["name"])) . " has been uploaded.";
-        } else {
-            echo "Sorry, there was an error uploading your file.";
-        }
-    }
+    savePhoto($officerImage, $target_file);
 }
 ?>
 <section id="officers">
