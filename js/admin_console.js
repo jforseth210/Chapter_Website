@@ -87,9 +87,9 @@ function newRow(parentId, row) {
     newChild.getElementsByTagName("form")[0].id = "new" + idPrefix + "Form";
 
    //Set the value of any row_num inputs
+   var rowNumFields = newChild.getElementsByClassName("row_num");
    for (var i = 0; i < rowNumFields.length; i++) {
    var newRowNum = parentElement.children.length;
-   var rowNumFields = newChild.getElementsByClassName("row_num");
         rowNumFields[i].id = newRowNum;
     }
 
