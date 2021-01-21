@@ -62,7 +62,7 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
-            <p class="lead">
+            <p class="lead" style="word-wrap: break-word">
                     <?php
                     $aboutFile = fopen("../data/aboutUsText.txt","r");
                     $aboutUsText = fread($aboutFile,filesize("../data/aboutUsText.txt"));
