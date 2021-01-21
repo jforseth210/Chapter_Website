@@ -4,7 +4,7 @@
       <p class="m-0 text-center text-white">Copyright &copy; Fairfield FFA 2020.</p>
       <p class="m-0 text-center text-white">Template by startbootstrap.com.</p>
       <p class="m-0 text-center text-white">Designed by Justin Forseth.</p>
-      <p class="m-0 text-center text-white"><a href="admin_console.php">Login</a> to access admin page.</p>
+      <p class="m-0 text-center text-white"><a href="admin.php">Login</a> to access admin page.</p>
     </div>
     <!-- /.container -->
   </footer>
