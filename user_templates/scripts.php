@@ -108,7 +108,7 @@ function advanceNewsCarousel(){
 function populateNewsfeed(index){
   var newSlide = document.getElementById("carouselItemTemplate").content.cloneNode(true);
   var articleElement = document.getElementById("singleNewsItemTemplate").content.cloneNode(true);
-  var url = "https://fairfieldffa.org/news_helper.php";
+  var url = "news_helper.php";
   var params = "get_article=submit&index="+index;
   var xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);

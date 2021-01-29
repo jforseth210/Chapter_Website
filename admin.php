@@ -6,7 +6,7 @@ ini_set("display_errors", 1);
 //If the user isn't logged in,
 //send them back to the login page.
 if (!$_SESSION['valid']) {
-    header("Location: https://fairfieldffa.org/login.php");
+    header("Location: login.php");
     exit();
 };
 //Start the file

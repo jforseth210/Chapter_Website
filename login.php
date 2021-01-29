@@ -114,7 +114,7 @@ session_start();
       $_SESSION['username'] = 'park';
       $msg = "Logged in!";
       
-      header("Location: https://fairfieldffa.org/admin.php");
+      header("Location: admin.php");
       exit();
     } else {
       $msg = 'Wrong username or password';
