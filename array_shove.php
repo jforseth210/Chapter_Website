@@ -3,7 +3,9 @@
 function array_shove(array $array, $selected_key, $direction)
 {
     $new_array = array();
-
+    if ($selected_key == 0){
+      return $array;
+    }
     foreach ($array as $key => $value) {
         if ($key !== $selected_key) {
             $new_array["$key"] = $value;
