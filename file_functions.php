@@ -2,9 +2,17 @@
 //Function from internet to reorder array.
 require_once("array_shove.php");
 
-
+/*
+Takes a file uploaded via a form, and
+saves it to the path specified in the
+string $target_file
+*/
 function savePhoto($photo, $target_file)
 {
+    /*
+    Upload sucessful if 1
+    Upload failed if 0
+    */
     $uploadOk = 1;
 
     // Check if image file is a actual image or fake image

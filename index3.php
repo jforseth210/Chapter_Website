@@ -1,4 +1,8 @@
 <?php
+   /*
+   As far as I know, this file is not being used for anything.
+   It can probably be deleted...
+   */
    error_reporting(E_ALL);
    ini_set("display_errors", 1);
 ?>
@@ -147,7 +151,7 @@ footer {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/js/swiper.min.js"></script>
   <!--Cookie notice-->
   <script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
-  
+
 
 <!-- Matomo -->
 <script type="text/javascript">

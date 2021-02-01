@@ -1,89 +1,51 @@
 <?php
 ob_start();
 session_start();
-?>
 
-<?
-   //error_reporting(E_ALL);
-   //ini_set("display_errors", 1);
-?>
+//Message displayed to user
+$msg = '';
 
+//Handle form submission
+if (
+  isset($_POST['login']) && !empty($_POST['inputEmail'])
+  && !empty($_POST['inputPassword'])
+){
+  if (
+    //Check that username and password are correct
+    $_POST['inputEmail'] == 'park@fairfieldffa.org' &&
+    //This is storing the password in plaintext
+    //THIS IS REALLY BAD
+    $_POST['inputPassword'] == 'parkparkparkpark'
+  ) {
+    //If username and password are
+    //correct, set session variables
+    //accordingly
+    $_SESSION['valid'] = true;
+    $_SESSION['timeout'] = time();
+    $_SESSION['username'] = 'park';
+    $msg = "Logged in!";
+
+    //Redirect to admin page
+    header("Location: admin.php");
+    exit();
+  } else {
+    $msg = 'Wrong username or password';
+  }
+} else {
+}
+?>
 
 <!doctype html>
 <html lang="en">
 
 <head>
   <style>
-    html,
-    body {
-      height: 100%;
-    }
-
-    body {
-      display: -ms-flexbox;
-      display: -webkit-box;
-      display: flex;
-      -ms-flex-align: center;
-      -ms-flex-pack: center;
-      -webkit-box-align: center;
-      align-items: center;
-      -webkit-box-pack: center;
-      justify-content: center;
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color: #f5f5f5;
-    }
-
-    .form-signin {
-      width: 100%;
-      max-width: 330px;
-      padding: 15px;
-      margin: 0 auto;
-    }
-
-    .form-signin .checkbox {
-      font-weight: 400;
-    }
-
-    .form-signin .form-control {
-      position: relative;
-      box-sizing: border-box;
-      height: auto;
-      padding: 10px;
-      font-size: 16px;
-    }
-
-    .form-signin .form-control:focus {
-      z-index: 2;
-    }
-
-    .form-signin input[type="email"] {
-      margin-bottom: -1px;
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-
-    .form-signin input[type="password"] {
-      margin-bottom: 10px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-
-      .alert-fixed {
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        z-index: 9999;
-        border-radius: 0px
-      }
-    }
   </style>
-  <!--Don't worry about any of this...-->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Website for the Fairfield FFA Chapter.">
   <meta name="author" content="Justin Forseth">
-  <!--The title at the top of the tab.-->
+
   <title>Login</title>
 
   <!-- Bootstrap core CSS -->
@@ -92,38 +54,18 @@ session_start();
   <!-- Custom styles for this template -->
   <link href="css/scrolling-nav.css" rel="stylesheet">
   <link href="css/gallery.css" rel="stylesheet">
-  <!--Swiper CSS for photo gallery-->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css" rel="stylesheet">
-  <link rel="shortcut icon" href="images/emblem_favicon.png" type="image/x-icon">
+  <link href="css/login.css" rel="stylesheet">
+
 </head>
 
 <body>
-  <?php
-  $msg = '';
-  if (
-    isset($_POST['login']) && !empty($_POST['inputEmail'])
-    && !empty($_POST['inputPassword'])
-  ) {
-
-    if (
-      $_POST['inputEmail'] == 'park@fairfieldffa.org' &&
-      $_POST['inputPassword'] == 'parkparkparkpark'
-    ) {
-      $_SESSION['valid'] = true;
-      $_SESSION['timeout'] = time();
-      $_SESSION['username'] = 'park';
-      $msg = "Logged in!";
-      
-      header("Location: admin.php");
-      exit();
-    } else {
-      $msg = 'Wrong username or password';
-    }
-  } else {
-  }
-  ?>
   <div class="container">
     <?php
+    /*
+    If there's a message for the user,
+    "Wrong username/password", etc.
+    display it here.
+    */
     if (!empty($msg)){
     echo
     "<div class=\"row\">
