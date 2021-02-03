@@ -44,7 +44,7 @@ if (isset($_POST['resourceMoveSubmit'])) {
     //Get the row number of the resource being modified
     $rowToMove = intVal($_POST['row_num']);
     $direction = $_POST['direction'];
-    reorderArrayJSON("resources.json", $rowToMove, $direction);
+    arrayMoveUpDownJSON("resources.json", $rowToMove, $direction);
 }
 ?>
 <section id="resources">

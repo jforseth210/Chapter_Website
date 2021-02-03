@@ -61,7 +61,7 @@ if (isset($_POST['contactInfoMoveSubmit'])) {
     //Get the row number of the contact being modified
     $rowToMove = intVal($_POST['row_num']);
     $direction = $_POST['direction'];
-    reorderArrayJSON("contactInfoText.json", $rowToMove, $direction);
+    arrayMoveUpDownJSON("contactInfoText.json", $rowToMove, $direction);
 }
 ?>
 <section id="contact">

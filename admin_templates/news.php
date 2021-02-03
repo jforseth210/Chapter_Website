@@ -36,7 +36,7 @@ if (isset($_POST['newsMoveSubmit'])) {
     //Get the row number of the news being modified
     $rowToMove = intVal($_POST['row_num']);
     $direction = $_POST['direction'];
-    reorderArrayJSON("news.json", $rowToMove, $direction);
+    arrayMoveUpDownJSON("news.json", $rowToMove, $direction);
 }
 ?>
 <section id="news">

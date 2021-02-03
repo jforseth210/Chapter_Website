@@ -52,7 +52,7 @@ if (isset($_POST['officerMoveSubmit'])) {
     //Get the row number of the officer being modified
     $rowToMove = intVal($_POST['row_num']);
     $direction = $_POST['direction'];
-    reorderArrayJSON("officers.json", $rowToMove, $direction);
+    arrayMoveUpDownJSON("officers.json", $rowToMove, $direction);
 }
 //
 if (isset($_POST["officerImageSubmit"])) {

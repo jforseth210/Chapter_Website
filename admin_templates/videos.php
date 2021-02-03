@@ -55,7 +55,7 @@ if (isset($_POST['videoMoveSubmit'])) {
     //Get the row number of the video being modified
     $rowToMove = intVal($_POST['row_num']);
     $direction = $_POST['direction'];
-    reorderArrayJSON("videos.json", $rowToMove, $direction);
+    arrayMoveUpDownJSON("videos.json", $rowToMove, $direction);
 }
 ?>
 <section id="videos">
