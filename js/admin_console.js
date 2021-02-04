@@ -173,4 +173,5 @@ events = ["onSort"].forEach(function (name) {
 });
 
 Sortable.create(aboutUsPhotoCards, options);
+Sortable.create(PhotoCards, options);
 Sortable.create(contactTable, options);
