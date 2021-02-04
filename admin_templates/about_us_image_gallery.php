@@ -51,28 +51,32 @@ if (isset($_POST['aboutUsPhotoCardsReorderSubmit'])) {
                 <div class=\"card mx-auto w-100 my-5 d-flex zoom\">
                     <img id=\"aboutUsPhoto$aboutUsPhoto\" class=\"fresh-id fresh-for card-img-top\" src=\"{$currentAboutUsPhoto["path"]}\">
                     
-                    <form role='form' id=\"aboutUsPhotos$aboutUsPhoto" . "imagechange" . "\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#aboutUsPhotos" . "' method=\" POST\" enctype=\"multipart/form-data\">
+                    <form role='form' id=\"aboutUsPhotos$aboutUsPhoto" . "imagechange" . "\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#aboutUsPhotos" . "' method=\"POST\" enctype=\"multipart/form-data\">
+                        <input hidden name=row_num  value=\"$aboutUsPhoto\">
+                        <input name=\"photoSubmit\" type=\"submit\" value=\"Save\" class=\"col-4 submit-button btn btn-primary\" />
+                        <div class=\"custom-file\">
+                            <input type=\"file\" name=\"photo\" class=\"new-load-file-function fresh-id form-control-file\" id=\"customAboutUsPhoto$aboutUsPhoto\" onchange=\"loadFile(event, 'aboutUsPhoto$aboutUsPhoto')\">
+                            <label class=\"fresh-for custom-file-label\" for=\"customAboutUsPhoto$aboutUsPhoto\">Choose file</label>
+                        </div>
                     </form>
                     
-                    <form role='form' id=\"" . "aboutUsPhoto" . $aboutUsPhoto . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#aboutUsPhotos" . "' method=\" POST\">
+                    <form role='form' id=\"" . "aboutUsPhoto" . $aboutUsPhoto . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#aboutUsPhotos" . "' method=\"POST\">
+                        <input hidden name=row_num value=\"$aboutUsPhoto\">
                     </form>
+
+                    <input hidden name=row_num form=\"aboutUsPhotos$aboutUsPhoto\" value=\"$aboutUsPhoto\">
                     
-                    <div class=\"custom-file\">
-                        <input type=\"file\" name=\"photo\" class=\"new-load-file-function fresh-id form-control-fi<div class=\"col-md-4 d-flex\">
-                        <label class=\"fresh-for custom-file-label\" for=\"customAboutUsPhoto$aboutUsPhoto\">Choose file</label>
-                    </div>
                           
                     <div class=\"mt-auto\">
                         <div role=\"group\" class=\"btn-group mx-auto mt-auto w-100\">
-                            <input form=\"" . "aboutUsPhoto" . $aboutUsPhoto . "Delete\" class=\"col-4 new-disable btn btn-danger mx-auto\" type=submit name=\"aboutUsPhotoDeleteSubmit\" value=\"Delete\" />
-                            <input name=\"photoSubmit\" type=\"submit\" value=\"Save\" class=\"col-4 submit-button btn btn-primary\" />
+                            <input form=\"" . "aboutUsPhoto" . $aboutUsPhoto . "Delete\" 
+                            class=\"col-4 new-disable btn btn-danger mx-auto\" type=submit name=\"aboutUsPhotoDeleteSubmit\" value=\"Delete\" />
+                            
+                            
                             <button type=\"button\" class=\"new-disable btn btn-success mx-auto\" onclick=\"newRow('aboutUsPhotoCards',$aboutUsPhoto);\">New</button>
                         </div>
                     </div>
                     
-                    <input hidden name=row_num form=\"aboutUsPhotos$aboutUsPhoto" . "imagechange" . "\" value=\"$aboutUsPhoto\">
-                    <input hidden name=row_num form=\"aboutUsPhotos$aboutUsPhoto\" value=\"$aboutUsPhoto\">
-                    <input hidden name=row_num form=\"aboutUsPhoto$aboutUsPhoto\" . \"Delete\" value=\"$aboutUsPhoto\">
                 </div>
               </div>
                               ";
