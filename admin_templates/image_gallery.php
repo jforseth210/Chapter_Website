@@ -63,15 +63,15 @@ if (isset($_POST['PhotoCardsReorderSubmit'])) {
                                   <div class=\"card mx-auto w-100 my-5 d-flex zoom\">
                                           <img id=\"photosPhoto$Photo\"class=\"fresh-id fresh-for card-img-top\" src=\"{$currentPhoto["path"]}\">
                                           <form  role='form' id=\"Photos$Photo" . "imagechange" . "\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#photos" . "' method=\"POST\" enctype=\"multipart/form-data\">
-                                          </form>
                                           <div class=\"custom-file\">
-                                              <input type=\"file\"  class=\"new-load-file-function btn-file fresh-id form-control-file\"
-                                                     onchange=\"loadFile(event, 'photosPhoto$Photo')\"
-                                                     name=\"photo\"
-                                              id=\"customPhoto$Photo\">
-
-                                              <label class=\"fresh-for custom-file-label\" for=\"customPhoto$Photo\">Choose file</label>
+                                          <input type=\"file\"  class=\"new-load-file-function btn-file fresh-id form-control-file\"
+                                          onchange=\"loadFile(event, 'photosPhoto$Photo')\"
+                                          name=\"photo\"
+                                          id=\"customPhoto$Photo\">
+                                          
+                                          <label class=\"fresh-for custom-file-label\" for=\"customPhoto$Photo\">Choose file</label>
                                           </div>
+                                          </form>
 
                                           <!--<div class=\"form-group\">
                                             <label>Upload Image</label>
@@ -101,7 +101,7 @@ if (isset($_POST['PhotoCardsReorderSubmit'])) {
                                           
                                           <input form=\"" . "Photo" . $Photo . "Delete\" class=\"new-disable btn btn-danger mx-auto\" type=submit name=\"PhotoDeleteSubmit\" value=\"Delete\" />
                                           
-                                          <input name=\"photoSubmit\" type=\"submit\" value=\"Save\" class=\"submit-button btn btn-primary\"/>
+                                          <input form=\"Photos$Photo" . "imagechange" . "\" name=\"photoSubmit\" type=\"submit\" value=\"Save\" class=\"submit-button btn btn-primary\"/>
                                           
                                           <button type=\"button\" class=\"new-disable  btn btn-success mx-auto\" onclick=\"newRow('PhotoCards',$Photo);\">New</button>
                                           </div>
