@@ -153,6 +153,8 @@ function loadFile(event, imageId) {
   image.src = URL.createObjectURL(event.target.files[0]);
 }
 
+
+
 var options = {
   animation: 100,
 };
@@ -171,3 +173,4 @@ events = ["onSort"].forEach(function (name) {
 });
 
 Sortable.create(aboutUsPhotoCards, options);
+Sortable.create(contactTable, options);
