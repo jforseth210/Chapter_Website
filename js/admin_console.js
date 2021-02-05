@@ -174,4 +174,8 @@ events = ["onSort"].forEach(function (name) {
 
 Sortable.create(aboutUsPhotoCards, options);
 Sortable.create(PhotoCards, options);
+Sortable.create(newsCards, options);
+Sortable.create(officerCards, options);
+Sortable.create(resourceCards, options);
 Sortable.create(contactTable, options);
+Sortable.create(videoTable, options);
