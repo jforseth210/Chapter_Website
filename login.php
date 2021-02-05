@@ -4,34 +4,33 @@ session_start();
 
 //Message displayed to user
 $msg = '';
+require_once("file_functions.php");
+$users = readArrayFromJSON("users.json");
 
 //Handle form submission
 if (
-  isset($_POST['login']) && !empty($_POST['inputEmail'])
-  && !empty($_POST['inputPassword'])
+  isset($_POST['login']) && !empty($_POST['username'])
+  && !empty($_POST['password'])
 ){
-  if (
-    //Check that username and password are correct
-    $_POST['inputEmail'] == 'park@fairfieldffa.org' &&
-    //This is storing the password in plaintext
-    //THIS IS REALLY BAD
-    $_POST['inputPassword'] == 'parkparkparkpark'
-  ) {
-    //If username and password are
-    //correct, set session variables
-    //accordingly
-    $_SESSION['valid'] = true;
-    $_SESSION['timeout'] = time();
-    $_SESSION['username'] = 'park';
-    $msg = "Logged in!";
-
-    //Redirect to admin page
-    header("Location: admin.php");
-    exit();
-  } else {
-    $msg = 'Wrong username or password';
+  $login_suceeded = false;
+  for ($i = 0; $i < sizeOf($users); $i++){
+    if (
+      $users[$i]["username"] == $_POST['username'] && 
+      password_verify($_POST['password'], $users[$i]["password_hash"])
+    ){
+      $_SESSION['valid'] = true;
+      $_SESSION['timeout'] = time();
+      $_SESSION['username'] = $users[$i]["username"];
+      $_SESSION['access'] = $users[$i]["access"];
+      $login_suceeded = true;
+      header("Location: admin.php");
+      exit();
+    } else {
+      $msg = 'Wrong username or password';
+    }
   }
 } else {
+  $msg = 'Please enter a username and/or password';
 }
 ?>
 
@@ -80,10 +79,10 @@ if (
                                                     ?>" method="post">
         <img class="mb-4" src="images/emblem.png" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="username" class="sr-only">Email address</label>
+        <input type="text" name="username" id="username" class="form-control" placeholder="Email address" required autofocus>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <!--<div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
