@@ -2,34 +2,23 @@
   if (isset($_POST['change_password_submit'])) {
     $old_password = $_POST['old_password'];  
     $confirm_old_password = $_POST['confirm_old_password'];  
-    $new_password = $_POST['new_password'];  
-    echo ("old_password:" . $old_password);
-    echo ("confirm_old_password:" . $confirm_old_password);
-    echo ("new_password:" . $new_password);
+    $new_password = $_POST['new_password'];
     if ($old_password == $confirm_old_password){
-      echo ("MATCH");
       $users = readArrayFromJSON("users.json");
       $user = array();
       for($i = 0; $i < sizeof($users); $i++){
         if ($users[$i]['username']==$_SESSION['username']){
-          echo ("USER FOUND");
           $user = $users[$i];
           if (password_verify($old_password, $user["password_hash"])){
-            echo ("PASSWORD VERIFIED");
-            echo ("OLD HASH:<br/>");
-            echo($user["password_hash"]);
-            $user["password_hash"] == password_hash($new_password, PASSWORD_DEFAULT);
-            echo ("NEW HASH:<br/>");
-            echo(password_hash($new_password, PASSWORD_DEFAULT));
-            $user["updated"]="True";
+            $user["password_hash"] = password_hash($new_password, PASSWORD_DEFAULT);
             updateRowJSON($i, $user, "users.json");
           } else {
             echo("Old password is incorrect");
           } 
-        } else {
-          echo("Passwords do not match!");
         }
-      }
+      } 
+    } else {
+      echo("Passwords do not match!");
     }
   }
 ?>
