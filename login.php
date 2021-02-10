@@ -15,12 +15,13 @@ if (
   $login_suceeded = false;
   for ($i = 0; $i < sizeOf($users); $i++){
     if (
-      $users[$i]["username"] == $_POST['username'] && 
+      $users[$i]["username"] == $_POST['username'] &&
       password_verify($_POST['password'], $users[$i]["password_hash"])
     ){
       $_SESSION['valid'] = true;
       $_SESSION['timeout'] = time();
       $_SESSION['username'] = $users[$i]["username"];
+      $_SESSION['real_name'] = $users[$i]["real_name"];
       $_SESSION['access'] = $users[$i]["access"];
       $login_suceeded = true;
       header("Location: admin.php");
