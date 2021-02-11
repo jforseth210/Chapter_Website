@@ -178,4 +178,5 @@ Sortable.create(newsCards, options);
 Sortable.create(officerCards, options);
 Sortable.create(resourceCards, options);
 Sortable.create(contactTable, options);
+Sortable.create(userTable, options);
 Sortable.create(videoTable, options);
