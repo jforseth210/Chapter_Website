@@ -12,7 +12,21 @@ if (isset($_POST["photosNewSubmit"])) {
   AddNewRowJSON($PhotoArray, "ImageGallery.json");
   savePhoto($photo, $target_file);
 }
+if (isset($_POST["photoSubmit"])) {
+  $photo = $_FILES['photo'];
+  $rowToUpdate = intVal($_POST['row_num']);
 
+  $imageFileType = strtolower(pathinfo($photo["name"], PATHINFO_EXTENSION));
+
+  //Save as images/aboutUsPhotos/nameOfOffice.fileExtension
+  $target_dir = "images/gallery/";
+  $target_file = $target_dir . basename($photo["name"]);
+  $aboutUsPhotoArray = array(
+    "path" => $target_file
+  );
+  updateRowJSON($rowToUpdate, $aboutUsPhotoArray, "ImageGallery.json");
+  savePhoto($photo, $target_file);
+}
 if (isset($_POST['PhotoDeleteSubmit'])) {
     //Get the row number of the officer being modified
     $rowToDelete = intVal($_POST['row_num']);
@@ -23,7 +37,12 @@ if (isset($_POST['PhotoMoveSubmit'])) {
     //Get the row number of the officer being modified
     $rowToMove = intVal($_POST['row_num']);
     $direction = $_POST['direction'];
-    reorderArrayJSON("ImageGallery.json", $rowToMove, $direction);
+    arrayMoveUpDownJSON("ImageGallery.json", $rowToMove, $direction);
+}
+if (isset($_POST['PhotoCardsReorderSubmit'])) {
+  $old_index = intVal($_POST['old_index']);
+  $new_index = $_POST['new_index'];
+  reorderArrayJSON("ImageGallery.json", $old_index, $new_index);
 }
 ?>
 <section id="photos">
@@ -45,13 +64,14 @@ if (isset($_POST['PhotoMoveSubmit'])) {
                                           <img id=\"photosPhoto$Photo\"class=\"fresh-id fresh-for card-img-top\" src=\"{$currentPhoto["path"]}\">
                                           <form  role='form' id=\"Photos$Photo" . "imagechange" . "\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#photos" . "' method=\"POST\" enctype=\"multipart/form-data\">
                                           <div class=\"custom-file\">
-                                              <input type=\"file\"  class=\"new-load-file-function btn-file fresh-id form-control-file\"
-                                                     onchange=\"loadFile(event, 'photosPhoto$Photo')\"
-                                                     name=\"photo\"
-                                              id=\"customPhoto$Photo\">
-
-                                              <label class=\"fresh-for custom-file-label\" for=\"customPhoto$Photo\">Choose file</label>
+                                          <input type=\"file\"  class=\"new-load-file-function btn-file fresh-id form-control-file\"
+                                          onchange=\"loadFile(event, 'photosPhoto$Photo')\"
+                                          name=\"photo\"
+                                          id=\"customPhoto$Photo\">
+                                          
+                                          <label class=\"fresh-for custom-file-label\" for=\"customPhoto$Photo\">Choose file</label>
                                           </div>
+                                          </form>
 
                                           <!--<div class=\"form-group\">
                                             <label>Upload Image</label>
@@ -71,38 +91,23 @@ if (isset($_POST['PhotoMoveSubmit'])) {
                                           <input hidden name=row_num form=\"Photos" . $Photo . "MoveUp\" value=\"$Photo\">
                                           <input hidden name=row_num form=\"Photos" . $Photo . "MoveDown\" value=\"$Photo\">
 
-                                          <input name=\"photoSubmit\" type=\"submit\" value=\"Save\" class=\"submit-button btn btn-primary w-100\"/>
                                           </form>
-                                          <br />
-                                          <div class=\"card-body\">
-                                              <br />
-                                              <input hidden name=row_num form=\"Photos$Photo\" value=\"$Photo\">
-                                              <input hidden name=row_num form=\"Photo$Photo" . "Delete\" value=\"$Photo\">
-                                              <div class=\"mt-auto\">
-                                              <div role=\"group\" class=\"btn-group mx-auto mt-auto\">
-                                                <form style=\"display:inline;\" role='form' id=\"Photos" . $Photo . "MoveUp\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#photos" . "' method=\"POST\">
-                                                  <button class=\"new-disable btn btn-secondary\" type=submit name=\"PhotoMoveSubmit\">
-                                                  Move Up
-                                                  </button>
-                                                  <input hidden name=\"direction\" value=\"up\"/>
-                                                </form>
-                                                    <form role='form' id=\"" . "Photo" . $Photo . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#photos" . "' method=\"POST\">
-                                                        <input form=\"" . "Photo" . $Photo . "Delete\" class=\"new-disable btn btn-danger mx-auto\" type=submit name=\"PhotoDeleteSubmit\" value=\"Delete\" />
-                                                    </form>
-
-                                                    <button type=\"button\" class=\"new-disable  btn btn-success mx-auto\" onclick=\"newRow('PhotoCards',$Photo);\">New</button>
-
-                                                <form class=\"mx-0\" style=\"display:inline;\" role='form' id=\"Photos" . $Photo . "MoveDown\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#photos" . "' method=\"POST\">
-                                                  <button class=\"new-disable btn btn-secondary \" type=submit name=\"PhotoMoveSubmit\" >
-                                                    Move Down
-                                                  </button>
-                                                  <input hidden name=\"direction\" value=\"down\"/>
-                                                </form>
-                                              </div>
+                                          <input hidden name=row_num form=\"Photos$Photo\" value=\"$Photo\">
+                                          <input hidden name=row_num form=\"Photo$Photo" . "Delete\" value=\"$Photo\">
+                                          <form role='form' id=\"" . "Photo" . $Photo . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#photos" . "' method=\"POST\">
+                                          </form>
+                                          <div class=\"mt-auto\">
+                                          <div role=\"group\" class=\"btn-group w-100 mx-auto mt-auto\">
+                                          
+                                          <input form=\"" . "Photo" . $Photo . "Delete\" class=\"new-disable btn btn-danger mx-auto\" type=submit name=\"PhotoDeleteSubmit\" value=\"Delete\" />
+                                          
+                                          <input form=\"Photos$Photo" . "imagechange" . "\" name=\"photoSubmit\" type=\"submit\" value=\"Save\" class=\"submit-button btn btn-primary\"/>
+                                          
+                                          <button type=\"button\" class=\"new-disable  btn btn-success mx-auto\" onclick=\"newRow('PhotoCards',$Photo);\">New</button>
                                           </div>
                                           </div>
-                                          <p></p>
-                                      </form>
+
+
                                   </div>
                               </div>
                               ";

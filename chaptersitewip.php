@@ -4,6 +4,7 @@ ini_set("display_errors", 1);
 echo "<!DOCTYPE html>";
 echo "<html lang=\"en\">";
 
+require_once("alert.php");
 require_once("file_functions.php");
 
 require_once("user_templates/head.php");

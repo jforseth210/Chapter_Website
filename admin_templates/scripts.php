@@ -29,6 +29,10 @@
 <!-- Plugin JavaScript -->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
+
+
+<script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+
 <!--Theme js-->
 <script src="js/scrolling-nav.js"></script>
 <!--<script src="js/gallery.js"></script>-->
