@@ -12,6 +12,9 @@
                     <a class="nav-link js-scroll-trigger" href="#about">About</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#accounts">Accounts</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#news">News</a>
                 </li>
                 <li class="nav-item">

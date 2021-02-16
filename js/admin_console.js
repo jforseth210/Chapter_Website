@@ -53,6 +53,9 @@ function newRow(parentId, row) {
   statement is required.
 */
     switch (parentId) {
+        case "userTable":
+            idPrefix = "user";
+            break;
         case "officerCards":
             idPrefix = "officer";
             break;
@@ -143,4 +146,19 @@ function newRow(parentId, row) {
 function loadFile(event, imageId){
   var image = document.getElementById(imageId);
   image.src = URL.createObjectURL(event.target.files[0]);
+}
+
+function checkIfAdminExists(id){
+  userAccessLevels = document.getElementsByName("access");
+  adminUserExists = false;
+  for(var i = 0; i < userAccessLevels.length; i++){
+    if (userAccessLevels[i].value == "admin"){
+      adminUserExists = true;
+    }
+  }
+  if (!adminUserExists){
+    alert("Please give someone else admin access first!");
+    document.getElementById(id).value = "admin"
+  }
+
 }

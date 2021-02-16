@@ -21,6 +21,64 @@ if (isset($_POST['change_password_submit'])) {
     echo ("Passwords do not match!");
   }
 }
+
+
+if (isset($_POST['userUpdateSubmit'])){
+  $rowToUpdate = intVal($_POST['row_num']);
+
+  $username = $_POST['username'];
+  $real_name = $_POST['name'];
+  $new_password = $_POST['password'];
+  $access = $_POST['access'];
+
+  if ($new_password != ""){
+    $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+  } else {
+    $oldUserArray = readArrayFromJSON("users.json");
+    $currentUserArray = $oldUserArray[$rowToUpdate];
+    $password_hash = $currentUserArray["password_hash"];
+  }
+
+  $userArray = array(
+      "username" => $username,
+      "password_hash" => $password_hash,
+      "real_name" => $real_name,
+      "access" => $access
+  );
+
+  updateRowJSON($rowToUpdate, $userArray, "users.json");
+
+}
+
+
+if (isset($_POST['userNewSubmit'])){
+  echo ("This ran");
+  $username = $_POST['username'];
+  $real_name = $_POST['name'];
+  $new_password = $_POST['password'];
+  $access = $_POST['access'];
+
+  $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+
+  $userArray = array(
+      "username" => $username,
+      "password_hash" => $password_hash,
+      "real_name" => $real_name,
+      "access" => $access
+  );
+  print_r($userArray);
+
+  addNewRowJSON($userArray, "users.json");
+
+}
+
+
+if (isset($_POST['userDeleteSubmit'])) {
+    //Get the row number of the video being modified
+    $rowToDelete = intVal($_POST['row_num']);
+
+    deleteRowJSON($rowToDelete, "users.json");
+}
 ?>
 <section id="accounts">
   <div class="container">
@@ -42,9 +100,10 @@ if (isset($_POST['change_password_submit'])) {
             <th>Name:</th>
             <th>Password Reset:</th>
             <th>Access:</th>
-            <th>Reorder</th>
-            <th>Save</th>
-          <tr/> 
+            <th>Reorder:</th>
+            <th>Add/Delete:</th>
+            <th>Save:</th>
+          <tr/>
         </thead>
           <tbody id='userTable'>
                 ");
@@ -53,29 +112,32 @@ if (isset($_POST['change_password_submit'])) {
             //Autocomplete new-password prevents browsers and password managers from automatically filling the password change fields.
             echo ("
             <tr>
-              <td><input class='form-control' name='username' value='{$currentUserArray["username"]}' /></td>
-              <td><input class='form-control' name='name' value='{$currentUserArray["real_name"]}' /></td>
-              <td><input class='form-control' name='password' type='password' placeholder='New Password' autocomplete='new-password'/></td>
-              
-              <td>
-                <select class='form-control'>
-            ");
-            $access_levels = array();
-            for ($i = 0; $i < sizeof($userArray); $i++){
-              array_push($access_levels, $userArray[$i]["access"]);
-            }
-            $access_levels = array_unique($access_levels);
-            foreach( $access_levels as $access_level){
-              if ($currentUserArray["access"] == $access_level){
-                $selected = "selected";
-              } else {
-                $selected = "";
+              <form role='form' id=\"users$user\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#accounts" . "' method=\"POST\">
+                <input hidden name=row_num form=\"users$user\" value=\"$user\">
+                <td><input class='erasable-value form-control' name='username' value='{$currentUserArray["username"]}' /></td>
+                <td><input class='erasable-value form-control' name='name' value='{$currentUserArray["real_name"]}' /></td>
+                <td><input class='erasable-value form-control' name='password' type='password' placeholder='New Password' autocomplete='new-password'/></td>
+
+                <td>
+                  <select class='erasable-value form-control' name='access' id='access$user' onchange='checkIfAdminExists(\"access$user\")'>
+              ");
+              $access_levels = array();
+              for ($i = 0; $i < sizeof($userArray); $i++){
+                array_push($access_levels, $userArray[$i]["access"]);
               }
-              echo ("<option $selected> $access_level</option>");
-            }
-            echo ("
-                </select>
-              </td>
+              $access_levels = array_unique($access_levels);
+              foreach( $access_levels as $access_level){
+                if ($currentUserArray["access"] == $access_level){
+                  $selected = "selected";
+                } else {
+                  $selected = "";
+                }
+                echo ("<option $selected> $access_level</option>");
+              }
+              echo ("
+                  </select>
+                </td>
+              </form>
               <td>
                 <div class=\"btn btn-secondary handle\">
                   <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-arrows-move\" viewBox=\"0 0 16 16\">
@@ -84,7 +146,14 @@ if (isset($_POST['change_password_submit'])) {
                 </div>
               </td>
               <td>
-                  <input form=\"user$user\" class=\"btn btn-primary submit-button\" type=submit name=\"user_update_submit\" value=\"Save\"/>
+                <button type=\"button\" class=\"new-disable btn btn-success\" onclick=\"newRow('userTable',$user);\">+</button>
+                <form style='display:inline' role='form' id=\"" . "users{$user}Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#accounts" . "' method=\"POST\">
+                    <input class=\"new-disable btn btn-danger\" type=submit name=\"userDeleteSubmit\" value=\"-\"/>
+                    <input hidden name=row_num form=\"users{$user}Delete\" value=\"$user\">
+                </form>
+              </td>
+              <td>
+                  <input form=\"users$user\" class=\"btn btn-primary submit-button\" type=submit name=\"userUpdateSubmit\" value=\"Save\"/>
               </td>
             </tr>");
         };
