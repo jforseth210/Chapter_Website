@@ -41,7 +41,7 @@
 */
 
 function newRow(parentId, row) {
-/*
+  /*
   Since the entire site is a single page,
   we need a unique prefix for when we
   modify ids.
@@ -136,14 +136,103 @@ function newRow(parentId, row) {
     //Create the element
     parentElement.appendChild(newChild);
 
-}
+  switch (parentId) {
+    case "officerCards":
+      idPrefix = "officer";
+      break;
+    case "resourceCards":
+      idPrefix = "resource";
+      break;
+    case "videoTable":
+      idPrefix = "video";
+      break;
+    case "PhotoCards":
+      idPrefix = "photos";
+      break;
+    case "contactTable":
+      idPrefix = "contactInfo";
+      break;
+    case "newsCards":
+      idPrefix = "news";
+      break;
+    case "aboutUsPhotoCards":
+      idPrefix = "aboutUsPhoto";
+  }
 
+  //Find the parent element, amd make a copy of it's last child.
+  var parentElement = document.getElementById(parentId);
+  var newChild = parentElement.lastElementChild.cloneNode(true);
+
+  //Automatically rename the form and submit buttons:
+  newChild.getElementsByClassName("submit-button")[0].name =
+    idPrefix + "NewSubmit";
+  newChild.getElementsByClassName("submit-button")[0].id =
+    idPrefix + "NewSubmit";
+  newChild
+    .getElementsByClassName("submit-button")[0]
+    .setAttribute("form", "new" + idPrefix + "Form");
+  newChild.getElementsByClassName("submit-button")[0].value = "Save New";
+  newChild.getElementsByTagName("form")[0].id = "new" + idPrefix + "Form";
+
+  //Set the value of any row_num inputs
+  var rowNumFields = newChild.getElementsByClassName("row_num");
+  for (var i = 0; i < rowNumFields.length; i++) {
+    var newRowNum = parentElement.children.length;
+    rowNumFields[i].id = newRowNum;
+  }
+
+  //Replace all images with a generic "upload" photo.
+  var images = newChild.getElementsByTagName("img");
+  for (var i = 0; i < images.length; i++) {
+    images[i].src =
+      "https://www.lifewire.com/thmb/2KYEaloqH6P4xz3c9Ot2GlPLuds=/1920x1080/smart/filters:no_upscale()/cloud-upload-a30f385a928e44e199a62210d578375a.jpg";
+  }
+
+  //Disable buttons
+  var newDisable = newChild.getElementsByClassName("new-disable");
+  for (var i = 0; i < newDisable.length; i++) {
+    newDisable[i].disabled = true;
+  }
+
+  //Append "addnew" to an id
+  var freshIds = newChild.getElementsByClassName("fresh-id");
+  for (var i = 0; i < freshIds.length; i++) {
+    freshIds[i].id = freshIds[i].id + "addnew";
+  }
+
+  //Append "addnew" to a for attribue.
+  var freshFors = newChild.getElementsByClassName("fresh-for");
+  for (var i = 0; i < freshFors.length; i++) {
+    freshFors[i].setAttribute("for", freshIds[i].id);
+  }
+
+  //Modify the loadFile() function
+  var newLoadFileFunctions = newChild.getElementsByClassName(
+    "new-load-file-function"
+  );
+  for (var i = 0; i < newLoadFileFunctions.length; i++) {
+    newLoadFileFunctions[i].setAttribute(
+      "onchange",
+      'loadFile(event,"' + freshIds[0].id + '")'
+    );
+  }
+
+  //Erase form inputs
+  var erasableInputs = newChild.getElementsByClassName("erasable-value");
+  for (var i = 0; i < erasableInputs.length; i++) {
+    erasableInputs[i].value = "";
+    erasableInputs[i].setAttribute("form", "new" + idPrefix + "Form");
+  }
+
+  //Create the element
+  parentElement.appendChild(newChild);
+}
 /*
   Takes the id of an image and an onchange event
   for a file input. Sets the image src to the
   selected image.
 */
-function loadFile(event, imageId){
+function loadFile(event, imageId) {
   var image = document.getElementById(imageId);
   image.src = URL.createObjectURL(event.target.files[0]);
 }
@@ -162,3 +251,30 @@ function checkIfAdminExists(id){
   }
 
 }
+
+
+var options = {
+  animation: 100,
+};
+
+events = ["onSort"].forEach(function (name) {
+  options[name] = function (evt) {
+      dataDict = {
+        "old_index":  evt.oldIndex,
+        "new_index":  evt.newIndex
+      }
+      dataDict[evt.from.id + "ReorderSubmit"] = "Reorder";
+    
+      $.post("admin.php", dataDict
+      ,function(){})
+  }
+});
+
+Sortable.create(aboutUsPhotoCards, options);
+Sortable.create(PhotoCards, options);
+Sortable.create(newsCards, options);
+Sortable.create(officerCards, options);
+Sortable.create(resourceCards, options);
+Sortable.create(contactTable, options);
+Sortable.create(userTable, options);
+Sortable.create(videoTable, options);

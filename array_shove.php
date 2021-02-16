@@ -1,5 +1,6 @@
 <?php
 //This function was stolen from https://beamtic.com/reordering-arrays-php
+//It shouldn't be necessary after the sorted js update
 function array_shove(array $array, $selected_key, $direction)
 {
     $new_array = array();

@@ -13,6 +13,7 @@ if (!$_SESSION['valid']) {
 echo "<!DOCTYPE html>";
 echo "<html lang=\"en\">";
 
+require_once("alert.php");
 require_once("file_functions.php");
 
 //Load bootstrap, stylesheets, etc.
@@ -20,17 +21,6 @@ require_once("admin_templates/head.php");
 
 //Opening body tag
 echo "<body>";
-
-
-//Simple alert for users.
-function echoToAlert($message){
-    //TODO
-}
-
-//console.log
-function echoToConsole($message){
-    echo "<script>console.log(\"$message\");</script>";
-}
 
 //Navbar and header
 require_once("admin_templates/header.php");
