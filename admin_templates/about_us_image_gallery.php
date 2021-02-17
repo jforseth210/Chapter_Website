@@ -60,40 +60,39 @@ if (isset($_POST['aboutUsPhotoCardsReorderSubmit'])) {
           for ($aboutUsPhoto = 0; $aboutUsPhoto <= sizeof($aboutUsPhotoArray) - 1; $aboutUsPhoto++) {
             $currentAboutUsPhoto = $aboutUsPhotoArray[$aboutUsPhoto];
             //Create the start of the row, which is also a form.
-            echo "
-            <div class=\"col-md-4 d-flex\">
-                <div class=\"card mx-auto w-100 my-5 d-flex zoom\">
-                    <img id=\"aboutUsPhoto$aboutUsPhoto\" class=\"fresh-id fresh-for card-img-top\" src=\"{$currentAboutUsPhoto["path"]}\">
-                    
-                    <form role='form' id=\"aboutUsPhotos$aboutUsPhoto" . "imagechange" . "\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#aboutUsPhotos" . "' method=\"POST\" enctype=\"multipart/form-data\">
-                        <input hidden name=row_num  value=\"$aboutUsPhoto\">
-                        <div class=\"custom-file\">
-                        <input type=\"file\" name=\"photo\" class=\"new-load-file-function fresh-id form-control-file\" id=\"customAboutUsPhoto$aboutUsPhoto\" onchange=\"loadFile(event, 'aboutUsPhoto$aboutUsPhoto')\">
-                        <label class=\"fresh-for custom-file-label\" for=\"customAboutUsPhoto$aboutUsPhoto\">Choose file</label>
-                        </div>
-                        </form>
-                        
-                        <form role='form' id=\"" . "aboutUsPhoto" . $aboutUsPhoto . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#aboutUsPhotos" . "' method=\"POST\">
-                        <input hidden name=row_num value=\"$aboutUsPhoto\">
-                        </form>
-                        
-                        <input hidden name=row_num form=\"aboutUsPhotos$aboutUsPhoto\" value=\"$aboutUsPhoto\">
-                        
-                        
-                        <div class=\"mt-auto\">
-                        <div role=\"group\" class=\"btn-group mx-auto mt-auto w-100\">
-                        <input form=\"" . "aboutUsPhoto" . $aboutUsPhoto . "Delete\" 
-                        class=\"col-4 new-disable btn btn-danger mx-auto\" type=submit name=\"aboutUsPhotoDeleteSubmit\" value=\"Delete\" />
-                        
-                        <input form=\"aboutUsPhotos$aboutUsPhoto" . "imagechange" . "\" name=\"aboutUsPhotoSubmit\" type=\"submit\" value=\"Save\" class=\"col-4 submit-button btn btn-primary\" />
-                        
-                        <button type=\"button\" class=\"new-disable btn btn-success mx-auto\" onclick=\"newRow('aboutUsPhotoCards',$aboutUsPhoto);\">New</button>
-                        </div>
-                        </div>
-                    
+          ?>
+            <div class="col-md-4 d-flex">
+              <div class="card mx-auto w-100 my-5 d-flex zoom">
+                <img id="aboutUsPhoto<?php echo $aboutUsPhoto; ?>" class="fresh-id fresh-for card-img-top" src="<?php echo $currentAboutUsPhoto["path"]; ?>">
+
+                <form role='form' id="aboutUsPhotos<?php echo $aboutUsPhoto; ?>imagechange" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>#aboutUsPhotos" method="POST" enctype="multipart/form-data">
+                  <input hidden name=row_num value="<?php echo $aboutUsPhoto; ?>">
+                  <div class="custom-file">
+                    <input type="file" name="photo" class="new-load-file-function fresh-id form-control-file" id="customAboutUsPhoto<?php echo $aboutUsPhoto; ?>" onchange="loadFile(event, 'aboutUsPhoto<?php echo $aboutUsPhoto; ?>')">
+                    <label class="fresh-for custom-file-label" for="customAboutUsPhoto<?php echo $aboutUsPhoto; ?>">Choose file</label>
+                  </div>
+                </form>
+
+                <form role='form' id="aboutUsPhoto<?php echo $aboutUsPhoto; ?>Delete" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>#aboutUsPhotos" method="POST">
+                  <input hidden name=row_num value="<?php echo $aboutUsPhoto; ?>">
+                </form>
+
+                <input hidden name=row_num form="aboutUsPhotos<?php echo $aboutUsPhoto; ?>" value="<?php echo $aboutUsPhoto; ?>">
+
+
+                <div class="mt-auto">
+                  <div role="group" class="btn-group mx-auto mt-auto w-100">
+                    <input form="aboutUsPhoto<?php echo $aboutUsPhoto; ?>Delete" class="col-4 new-disable btn btn-danger mx-auto" type=submit name="aboutUsPhotoDeleteSubmit" value="Delete" />
+
+                    <input form="aboutUsPhotos<?php echo $aboutUsPhoto; ?>imagechange" name="aboutUsPhotoSubmit" type="submit" value="Save" class="col-4 submit-button btn btn-primary" />
+
+                    <button type="button" class="new-disable btn btn-success mx-auto" onclick="newRow('aboutUsPhotoCards',<?php echo $aboutUsPhoto; ?>);">New</button>
+                  </div>
                 </div>
+
               </div>
-                              ";
+            </div>
+          <?php
           };
           ?>
         </div>
