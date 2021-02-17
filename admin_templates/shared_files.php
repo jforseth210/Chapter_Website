@@ -36,19 +36,19 @@ if (isset($_POST['googleDriveEmbedSubmit'])) {
                     $driveViewsArray = array_keys($driveViewTypeConversion);
                     ?>
                     <select class="form-control" name="viewType">
-                                            <?php
-                    for ($viewMode = 0; $viewMode <= sizeof($driveViewsArray) - 1; $viewMode++) {
-                        if ($driveViewTypeConversion[$driveViewsArray[$viewMode]] == $embedArray[1]) {
-                    ?>
-                            <option selected><?php echo $driveViewsArray[$viewMode]; ?></option>
                         <?php
-                        } else {
+                        for ($viewMode = 0; $viewMode <= sizeof($driveViewsArray) - 1; $viewMode++) {
+                            if ($driveViewTypeConversion[$driveViewsArray[$viewMode]] == $embedArray[1]) {
                         ?>
-                            <option><?php echo $driveViewsArray[$viewMode]?></option>
-                    <?php
-                        };
-                    }
-                    ?>
+                                <option selected><?php echo $driveViewsArray[$viewMode]; ?></option>
+                            <?php
+                            } else {
+                            ?>
+                                <option><?php echo $driveViewsArray[$viewMode] ?></option>
+                        <?php
+                            };
+                        }
+                        ?>
                     </select>
                     <input class="btn btn-primary" name="googleDriveEmbedSubmit" type=submit value=Submit>
                 </form>
