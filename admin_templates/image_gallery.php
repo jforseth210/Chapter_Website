@@ -63,7 +63,7 @@ if (isset($_POST['PhotoCardsReorderSubmit'])) {
                 <img id="photosPhoto<?php echo $Photo; ?>" class="fresh-id fresh-for card-img-top" src="<?php echo $currentPhoto["path"]; ?>">
                 <form role='form' id="Photos<?php echo $Photo; ?>imagechange" action='<?php htmlspecialchars($_SERVER[' PHP_SELF']) ?>#photos' method=" POST" enctype="multipart/form-data">
                   <div class="custom-file">
-                    <input type="file" class="new-load-file-function btn-file fresh-id form-control-file" onchange="loadFile(event, 'photosPhoto$Photo' )" name="photo" id="customPhoto$Photo">
+                    <input type="file" class="new-load-file-function btn-file fresh-id form-control-file" onchange="loadFile(event, 'photosPhoto<?php echo $Photo;?>' )" name="photo" id="customPhoto$Photo">
 
                     <label class="fresh-for custom-file-label" for="customPhoto<?php echo $Photo; ?>">Choose file</label>
                   </div>
