@@ -11,13 +11,13 @@ $users = readArrayFromJSON("users.json");
 if (
   isset($_POST['login']) && !empty($_POST['username'])
   && !empty($_POST['password'])
-){
+) {
   $login_suceeded = false;
-  for ($i = 0; $i < sizeOf($users); $i++){
+  for ($i = 0; $i < sizeOf($users); $i++) {
     if (
       $users[$i]["username"] == $_POST['username'] &&
       password_verify($_POST['password'], $users[$i]["password_hash"])
-    ){
+    ) {
       $_SESSION['valid'] = true;
       $_SESSION['timeout'] = time();
       $_SESSION['username'] = $users[$i]["username"];
@@ -66,13 +66,15 @@ if (
     "Wrong username/password", etc.
     display it here.
     */
-    if (!empty($msg)){
-    echo
-    "<div class=\"row\">
-      <div class=\"col-sm-8 mx-auto\">
-        <div class=\"alert alert-primary w-100 text-center\" role=\"alert\"> $msg </div>
+    if (!empty($msg)) {
+
+    ?>
+      <div class="row">
+        <div class="col-sm-8 mx-auto">
+          <div class="alert alert-primary w-100 text-center" role="alert"><?php echo $msg; ?></div>
+        </div>
       </div>
-    </div>";
+    <?php
     };
     ?>
     <div class="text-center">
@@ -84,11 +86,6 @@ if (
         <input type="text" name="username" id="username" class="form-control" placeholder="Email address" required autofocus>
         <label for="password" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <!--<div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>-->
         <button class="btn btn-lg btn-primary btn-block" name="login" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted">&copy; Fairfield FFA 2020</p>
       </form>
@@ -98,30 +95,29 @@ if (
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Plugin JavaScript -->
-  <!--<script src="vendor/jquery-easing/jquery.easing.min.js"></script>-->
-
-
-<!-- Matomo -->
-<script type="text/javascript">
-  var _paq = window._paq = window._paq || [];
-  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-  _paq.push(["setCookieDomain", "*.fairfieldffa.org"]);
-  _paq.push(["setDomains", ["*.fairfieldffa.org"]]);
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//jforseth.tech/matomo/";
-    _paq.push(['setTrackerUrl', u+'matomo.php']);
-    _paq.push(['setSiteId', '2']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<!-- End Matomo Code -->
-
-
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+    _paq.push(["setCookieDomain", "*.fairfieldffa.org"]);
+    _paq.push(["setDomains", ["*.fairfieldffa.org"]]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u = "//jforseth.tech/matomo/";
+      _paq.push(['setTrackerUrl', u + 'matomo.php']);
+      _paq.push(['setSiteId', '2']);
+      var d = document,
+        g = d.createElement('script'),
+        s = d.getElementsByTagName('script')[0];
+      g.type = 'text/javascript';
+      g.async = true;
+      g.src = u + 'matomo.js';
+      s.parentNode.insertBefore(g, s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
 </body>
 
 </html>
