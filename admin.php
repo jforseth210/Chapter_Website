@@ -10,8 +10,10 @@ if (!$_SESSION['valid']) {
     exit();
 };
 //Start the file
-echo "<!DOCTYPE html>";
-echo "<html lang=\"en\">";
+?>
+<!DOCTYPE html>
+<html lang="en">
+<?php
 
 require_once("alert.php");
 require_once("file_functions.php");
@@ -20,7 +22,9 @@ require_once("file_functions.php");
 require_once("admin_templates/head.php");
 
 //Opening body tag
-echo "<body>";
+?>
+<body>
+<?php
 
 //Navbar and header
 require_once("admin_templates/header.php");
@@ -58,6 +62,6 @@ require_once("admin_templates/contact.php");
 //Javascript
 require_once("admin_templates/scripts.php");
 
-echo "</body>";
-echo "</html>";
 ?>
+</body>
+</html>
