@@ -25,6 +25,8 @@ echo "<body>";
 //Navbar and header
 require_once("admin_templates/header.php");
 //About page editor
+require_once("admin_templates/account.php");
+//About page editor
 require_once("admin_templates/about.php");
 //About page editor
 require_once("admin_templates/about_us_image_gallery.php");

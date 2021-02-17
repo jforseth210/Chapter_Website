@@ -1,4 +1,4 @@
-<?
+<?php
     /*
     Ends the session and
     redirects to the homepage
