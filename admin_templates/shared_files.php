@@ -34,18 +34,22 @@ if (isset($_POST['googleDriveEmbedSubmit'])) {
                     <textarea class=form-control id="googleDriveEmbedCode" oninput="extractDriveFolderId();" name="googleDriveEmbedCode" style="height:200px"><?php echo "https://drive.google.com/drive/folders/" . $embedArray[0] . "?usp=sharing"; ?></textarea>
                     <?php
                     $driveViewsArray = array_keys($driveViewTypeConversion);
-                    echo "
-                    <select class=\"form-control\" name=\"viewType\">
-                                            ";
+                    ?>
+                    <select class="form-control" name="viewType">
+                                            <?php
                     for ($viewMode = 0; $viewMode <= sizeof($driveViewsArray) - 1; $viewMode++) {
                         if ($driveViewTypeConversion[$driveViewsArray[$viewMode]] == $embedArray[1]) {
-                            echo "<option selected>{$driveViewsArray[$viewMode]}</option>";
+                    ?>
+                            <option selected><?php echo $driveViewsArray[$viewMode]; ?></option>
+                        <?php
                         } else {
-                            echo "<option>{$driveViewsArray[$viewMode]}</option>";
+                        ?>
+                            <option><?php echo $driveViewsArray[$viewMode]?></option>
+                    <?php
                         };
                     }
-                    echo "
-                                        </select>"; ?>
+                    ?>
+                    </select>
                     <input class="btn btn-primary" name="googleDriveEmbedSubmit" type=submit value=Submit>
                 </form>
             </div>
