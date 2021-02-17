@@ -56,28 +56,27 @@ if (isset($_POST['newsCardsReorderSubmit'])) {
                     for ($news = 0; $news <= sizeof($newsArray) - 1; $news++) {
                         $currentnews = $newsArray[$news];
                         //Create the start of the row, which is also a form.
-                        echo "
-                            <div class=\"col-md-4 d-flex\">
-                                <div class=\"card mx-auto w-100 my-5 d-flex zoom\">
-                                        <form role='form' id=\"news$news\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#news" . "' method=\"POST\">
-                                            <h3><input form=\"news$news\" name=\"newsHeadline\" class=\"erasable-value form-control\" value=\"{$currentnews["news_headline"]}\" /></h3>
-                                            <textArea form=\"news$news\" style=\"height:200px !important\"name=\"newsArticle\" class=\"erasable-value form-control\">" . $currentnews["news_article"] . "</textarea>
+                        ?>
+                            <div class="col-md-4 d-flex">
+                                <div class="card mx-auto w-100 my-5 d-flex zoom">
+                                        <form role='form' id="news<?php echo $news;?>" action='<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>#news' method="POST">
+                                            <h3><input form="news<?php echo $news;?>" name="newsHeadline" class="erasable-value form-control" value="<?php echo $currentnews["news_headline"];?>" /></h3>
+                                            <textArea form="news<?php echo $news;?>" style="height:200px !important"name="newsArticle" class="erasable-value form-control"><?php $currentnews["news_article"]; ?></textarea>
 
                                             <br />
-                                            <input hidden name=row_num form=\"news$news\" value=\"$news\">
-                                            <input hidden name=row_num form=\"news$news" . "Delete\" value=\"$news\">
+                                            <input hidden name=row_num form="news<?php echo $news;?>" value="<?php echo $news;?>">
+                                            <input hidden name=row_num form="news<?php echo $news;?>Delete" value="<?php echo $news;?>">
 
-                                            <div role=\"group\" class=\"btn-group mx-auto mt-auto w-100\">
-                                                <form role='form' id=\"" . "news" . $news . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#news" . "' method=\" POST\">
-                                                    <input class=\"new-disable btn btn-danger mx-auto\" type=submit name=\"newsDeleteSubmit\" value=\"Delete\" />
+                                            <div role="group" class="btn-group mx-auto mt-auto w-100">
+                                                <form role='form' id="news<?php echo $news;?>Delete" action='<?php htmlspecialchars($_SERVER['PHP_SELF']);?>#news' method=" POST">
+                                                    <input class="new-disable btn btn-danger mx-auto" type=submit name="newsDeleteSubmit" value="Delete" />
                                                     </form>
-                                                    <input form=\"news$news\" class=\"btn btn-primary submit-button mx-auto\" type=submit name=\"newsUpdateSubmit\" value=\"Save\" />
-                                                <button type=\"button\" class=\"new-disable btn btn-success mx-auto\" onclick=\"newRow('newsCards',$news);\">New</button>
+                                                    <input form="news<?php echo $news;?>" class="btn btn-primary submit-button mx-auto" type=submit name="newsUpdateSubmit" value="Save" />
+                                                <button type="button" class="new-disable btn btn-success mx-auto" onclick="newRow('newsCards',<?php echo $news;?>);">New</button>
                                             </div>
                                     </form>
                                 </div>
                             </div>
-                            ";
                       };
                     ?>
                 </div>
