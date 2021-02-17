@@ -35,6 +35,7 @@ if (isset($_POST['officerUpdateSubmit'])) {
 
     //The images are saved as officer_title.ext, so if the officer's postition is
     //changed, the filename needs to change with them.
+
     rename("images/officers/" . $officerArray["officer_title"], "images/officers/" . $officerArray["officer_title"]);
 
 
@@ -93,41 +94,42 @@ if (isset($_POST['officerCardsReorderSubmit'])) {
                     for ($officer = 0; $officer <= sizeof($officerArray) - 1; $officer++) {
                         $currentOfficer = $officerArray[$officer];
                         //Create the start of the row, which is also a form.
-                        echo "
-                        <div class=\"col-md-4 d-flex\">
-                                    <div class=\"card mx-auto w-100 my-5 d-flex zoom\">
-                                    <img id=\"officerImage$officer\" class=\"fresh-id fresh-for card-img-top\" src=\"images/officers/{$currentOfficer["officer_title"]}.{$currentOfficer["officer_image_ext"]}\">
-                                    <form role='form' id=\"officers$officer" . "imagechange" . "\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#officers" . "' method=\"POST\" enctype=\"multipart/form-data\">
+                        ?>
+                        <div class="col-md-4 d-flex">
+                                    <div class="card mx-auto w-100 my-5 d-flex zoom">
+                                    <img id="officerImage<?php echo $officer; ?>" class="fresh-id fresh-for card-img-top" src="images/officers/<?php echo ($currentOfficer["officer_title"] . "." . $currentOfficer["officer_image_ext"]);?>">
+                                    <form role='form' id="officers<?php echo $officer; ?>imagechange" 
+                                    action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>#officers' method="POST" enctype="multipart/form-data">
                                     </form>
-                                    <div class=\"custom-file\">
-                                    <input form=\"officers$officer" . "imagechange" . "\" type=\"file\" name=\"officerImage\" class=\"fresh-id new-load-file-function form-control-file\" id=\"officerCustomFile$officer\" onchange=\"loadFile(event, 'officerImage$officer')\">
-                                    <label class=\"custom-file-label fresh-for\" for=\"officerCustomFile$officer\">Choose file</label>
+                                    <div class="custom-file">
+                                    <input form="officers<?php echo $officer; ?>imagechange" type="file" name="officerImage" class="fresh-id new-load-file-function form-control-file" id="officerCustomFile<?php echo $officer; ?>" onchange="loadFile(event, 'officerImage<?php echo $officer; ?>')">
+                                    <label class="custom-file-label fresh-for" for="officerCustomFile<?php echo $officer; ?>">Choose file</label>
                                     </div>
                                     
-                                    <input hidden name=row_num form=\"officers$officer" . "imagechange" . "\" value=\"$officer\">
-                                            <input form=\"officers$officer" . "imagechange" . "\" name=\"officerImageSubmit\" type=\"submit\" value=\"Upload New Picture\" class=\"btn btn-primary w-100 mt-2\"/>
+                                    <input hidden name=row_num form="officers<?php echo $officer; ?>imagechange" value="<?php echo $officer; ?>">
+                                            <input form="officers<?php echo $officer; ?>imagechange" name="officerImageSubmit" type="submit" value="Upload New Picture" class="btn btn-primary w-100 mt-2"/>
                                             </form>
 
-                                            <form role='form' id=\"officers$officer\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#officers" . "' method=\"POST\">
+                                            <form role='form' id="officers<?php echo $officer; ?>" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>#officers' method="POST">
                                             </form> 
-                                            <h3><input form=\"officers$officer\" name=\"officerTitle\" class=\"erasable-value form-control\" value=\"{$currentOfficer["officer_title"]}\" placeholder=\"Title\"/></h3>
-                                                <h5><input form=\"officers$officer\" name=\"officerName\" class=\"erasable-value form-control\" value=\"{$currentOfficer["officer_name"]}\" placeholder=\"Name\"/></h5>
+                                            <h3><input form="officers<?php echo $officer; ?>" name="officerTitle" class="erasable-value form-control" value="<?php echo $currentOfficer["officer_title"];?>" placeholder="Title"/></h3>
+                                                <h5><input form="officers<?php echo $officer; ?>" name="officerName" class="erasable-value form-control" value="<?php echo $currentOfficer["officer_name"]?>" placeholder="Name"/></h5>
 
-                                                <textArea form=\"officers$officer\" style=\"min-height:100px !important\" name=\"officerBio\" class=\"h-100 erasable-value form-control\" placeholder=\"Bio\">" . str_replace("NEWLINE", "\n", str_replace("VERTICALSEPARATOR", "|", $currentOfficer["officer_bio"])) . "</textarea>
+                                                <textArea form="officers<?php echo $officer; ?>" style="min-height:100px !important" name="officerBio" class="h-100 erasable-value form-control" placeholder="Bio"><?php echo str_replace("NEWLINE", "\n", str_replace("VERTICALSEPARATOR", "|", $currentOfficer["officer_bio"]));?></textarea>
                                                 
-                                                <form role='form' id=\"" . "officers" . $officer . "Delete\" action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "#officers" . "' method=\"POST\">
+                                                <form role='form' id="officers<?php echo $officer; ?>Delete" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>#officers' method="POST">
                                                 </form>
-                                                <input hidden name=row_num form=\"officers$officer\" value=\"$officer\">
-                                                <input hidden name=row_num form=\"officers$officer" . "Delete\" value=\"$officer\">
+                                                <input hidden name=row_num form="officers<?php echo $officer; ?>" value="<?php echo $officer; ?>">
+                                                <input hidden name=row_num form="officers<?php echo $officer; ?>Delete" value="<?php echo $officer; ?>">
 
-                                                <div role=\"group\" class=\"btn-group mx-auto mt-auto w-100\">
-                                                    <input form=\"" . "officers" . $officer . "Delete\" class=\"new-disable btn btn-danger mx-auto\" type=submit name=\"officerDeleteSubmit\" value=\"Delete\" />
-                                                    <input form=\"officers$officer\" class=\"btn btn-primary submit-button mx-auto\" type=submit name=\"officerUpdateSubmit\" value=\"Save\" />
-                                                    <button type=\"button\" class=\"new-disable btn btn-success mx-auto\" onclick=\"newRow('officerCards',$officer);\">New</button>
+                                                <div role="group" class="btn-group mx-auto mt-auto w-100">
+                                                    <input form="officers<?php echo $officer; ?>Delete" class="new-disable btn btn-danger mx-auto" type=submit name="officerDeleteSubmit" value="Delete" />
+                                                    <input form="officers<?php echo $officer; ?>" class="btn btn-primary submit-button mx-auto" type=submit name="officerUpdateSubmit" value="Save" />
+                                                    <button type="button" class="new-disable btn btn-success mx-auto" onclick="newRow('officerCards',<?php echo $officer; ?>);">New</button>
                                                 </div>
                                     </div>
                                 </div>
-                                ";
+                                <?php
                     };
                     ?>
                 </div>
