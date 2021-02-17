@@ -6,8 +6,8 @@ if (isset($_POST['newsNewSubmit'])) {
     $newsArticle = $_POST['newsArticle'];
 
     $newsArray = array(
-      "news_headline" => $newsHeadline,
-      "news_article" => $newsArticle
+        "news_headline" => $newsHeadline,
+        "news_article" => $newsArticle
     );
     addNewRowJSON($newsArray, "news.json");
 }
@@ -20,8 +20,8 @@ if (isset($_POST['newsUpdateSubmit'])) {
     $newsArticle = $_POST['newsArticle'];
 
     $newsArray = array(
-      "news_headline" => $newsHeadline,
-      "news_article" => $newsArticle
+        "news_headline" => $newsHeadline,
+        "news_article" => $newsArticle
     );
 
     updateRowJSON($rowToUpdate, $newsArray, "news.json");
@@ -39,9 +39,9 @@ if (isset($_POST['newsMoveSubmit'])) {
     arrayMoveUpDownJSON("news.json", $rowToMove, $direction);
 }
 if (isset($_POST['newsCardsReorderSubmit'])) {
-  $old_index = intVal($_POST['old_index']);
-  $new_index = $_POST['new_index'];
-  reorderArrayJSON("news.json", $old_index, $new_index);
+    $old_index = intVal($_POST['old_index']);
+    $new_index = $_POST['new_index'];
+    reorderArrayJSON("news.json", $old_index, $new_index);
 }
 ?>
 <section id="news">
@@ -56,28 +56,29 @@ if (isset($_POST['newsCardsReorderSubmit'])) {
                     for ($news = 0; $news <= sizeof($newsArray) - 1; $news++) {
                         $currentnews = $newsArray[$news];
                         //Create the start of the row, which is also a form.
-                        ?>
-                            <div class="col-md-4 d-flex">
-                                <div class="card mx-auto w-100 my-5 d-flex zoom">
-                                        <form role='form' id="news<?php echo $news;?>" action='<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>#news' method="POST">
-                                            <h3><input form="news<?php echo $news;?>" name="newsHeadline" class="erasable-value form-control" value="<?php echo $currentnews["news_headline"];?>" /></h3>
-                                            <textArea form="news<?php echo $news;?>" style="height:200px !important"name="newsArticle" class="erasable-value form-control"><?php $currentnews["news_article"]; ?></textarea>
+                    ?>
+                        <div class="col-md-4 d-flex">
+                            <div class="card mx-auto w-100 my-5 d-flex zoom">
+                                <form role='form' id="news<?php echo $news; ?>" action='<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>#news' method="POST">
+                                    <h3><input form="news<?php echo $news; ?>" name="newsHeadline" class="erasable-value form-control" value="<?php echo $currentnews["news_headline"]; ?>" /></h3>
+                                    <textArea form="news<?php echo $news; ?>" style="height:200px !important" name="newsArticle" class="erasable-value form-control"><?php echo $currentnews["news_article"]; ?></textarea>
 
-                                            <br />
-                                            <input hidden name=row_num form="news<?php echo $news;?>" value="<?php echo $news;?>">
-                                            <input hidden name=row_num form="news<?php echo $news;?>Delete" value="<?php echo $news;?>">
+                                    <br />
+                                    <input hidden name=row_num form="news<?php echo $news; ?>" value="<?php echo $news; ?>">
+                                    <input hidden name=row_num form="news<?php echo $news; ?>Delete" value="<?php echo $news; ?>">
 
-                                            <div role="group" class="btn-group mx-auto mt-auto w-100">
-                                                <form role='form' id="news<?php echo $news;?>Delete" action='<?php htmlspecialchars($_SERVER['PHP_SELF']);?>#news' method=" POST">
-                                                    <input class="new-disable btn btn-danger mx-auto" type=submit name="newsDeleteSubmit" value="Delete" />
-                                                    </form>
-                                                    <input form="news<?php echo $news;?>" class="btn btn-primary submit-button mx-auto" type=submit name="newsUpdateSubmit" value="Save" />
-                                                <button type="button" class="new-disable btn btn-success mx-auto" onclick="newRow('newsCards',<?php echo $news;?>);">New</button>
-                                            </div>
-                                    </form>
-                                </div>
+                                    <div role="group" class="btn-group mx-auto mt-auto w-100">
+                                        <form role='form' id="news<?php echo $news; ?>Delete" action='<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>#news' method=" POST">
+                                            <input class="new-disable btn btn-danger mx-auto" type=submit name="newsDeleteSubmit" value="Delete" />
+                                        </form>
+                                        <input form="news<?php echo $news; ?>" class="btn btn-primary submit-button mx-auto" type=submit name="newsUpdateSubmit" value="Save" />
+                                        <button type="button" class="new-disable btn btn-success mx-auto" onclick="newRow('newsCards',<?php echo $news; ?>);">New</button>
+                                    </div>
+                                </form>
                             </div>
-                      };
+                        </div>
+                    <?php
+                    };
                     ?>
                 </div>
             </div>
