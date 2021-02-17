@@ -16,7 +16,7 @@
                   $active = ($photo == 0) ? " active" : "";
                 ?>
                   <div class='carousel-item <?php echo ($active); ?>'>
-                    <img class='mx-auto d-block' src='<?php echo ($currentPhoto["path"]); ?>' style='max-height: 60vh !important;' alt='Slide $photo'>
+                    <img class='mx-auto d-block' src='<?php echo ($currentPhoto["path"]); ?>' style='max-height: 60vh !important;' alt='Slide <?php echo $photo; ?>'>
                   </div>
                 <?php
                 }
