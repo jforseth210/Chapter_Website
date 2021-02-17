@@ -61,7 +61,7 @@ if (isset($_POST['PhotoCardsReorderSubmit'])) {
             <div class="col-md-4 d-flex">
               <div class="card mx-auto w-100 my-5 d-flex zoom">
                 <img id="photosPhoto<?php echo $Photo; ?>" class="fresh-id fresh-for card-img-top" src="<?php echo $currentPhoto["path"]; ?>">
-                <form role='form' id="Photos<?php echo $Photo; ?>imagechange" action='<?php htmlspecialchars($_SERVER[' PHP_SELF']) ?>#photos' method=" POST" enctype="multipart/form-data">
+                <form role='form' id="Photos<?php echo $Photo; ?>imagechange" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>#photos' method=" POST" enctype="multipart/form-data">
                   <div class="custom-file">
                     <input type="file" class="new-load-file-function btn-file fresh-id form-control-file" onchange="loadFile(event, 'photosPhoto<?php echo $Photo;?>' )" name="photo" id="customPhoto$Photo">
 
@@ -76,7 +76,7 @@ if (isset($_POST['PhotoCardsReorderSubmit'])) {
                 </form>
                 <input hidden name=row_num form="Photos<?php echo $Photo; ?>" value="<?php echo $Photo; ?>">
                 <input hidden name=row_num form="Photo<?php echo $Photo; ?>Delete" value="<?php echo $Photo; ?>">
-                <form role='form' id="Photo<?php echo $Photo; ?>Delete" action='<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>#photos' method="POST">
+                <form role='form' id="Photo<?php echo $Photo; ?>Delete" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>#photos' method="POST">
                 </form>
                 <div class="mt-auto">
                   <div role="group" class="btn-group w-100 mx-auto mt-auto">

@@ -73,7 +73,7 @@ if (isset($_POST['aboutUsPhotoCardsReorderSubmit'])) {
                   </div>
                 </form>
 
-                <form role='form' id="aboutUsPhoto<?php echo $aboutUsPhoto; ?>Delete" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>#aboutUsPhotos" method="POST">
+                <form role='form' id="aboutUsPhoto<?php echo $aboutUsPhoto; ?>Delete" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>#aboutUsPhotos" method="POST">
                   <input hidden name=row_num value="<?php echo $aboutUsPhoto; ?>">
                 </form>
 

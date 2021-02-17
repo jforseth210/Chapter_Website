@@ -95,7 +95,7 @@ if (isset($_POST['contactTableReorderSubmit'])) {
                             //Create the start of the row, which is also a form.
                         ?>
                             <tr>
-                                <form role="form" id="contact<?php echo $contact; ?>" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                                <form role="form" id="contact<?php echo $contact; ?>" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>#contact" method="POST">
                                     <td>
                                         <input form="contact<?php echo $contact; ?>" name="contactName" class="erasable-value form-control" value="<?php echo $currentContactArray['contact_name'] ?>" />
                                     </td>
@@ -117,7 +117,7 @@ if (isset($_POST['contactTableReorderSubmit'])) {
                                     </td>
                                     <td>
                                         <button type="button" class="new-disable btn btn-success" onclick="newRow('contactTable',<?php echo $contact; ?>);">+</button>
-                                        <form role='form' id="contact<?php echo $contact; ?>Delete" action='<?php htmlspecialchars($_SERVER['PHP_SELF']);?>#contact" . "' method="POST">
+                                        <form role='form' id="contact<?php echo $contact; ?>Delete" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>#contact" . "' method="POST">
                                             <input class="new-disable btn btn-danger" type=submit name="contactInfoDeleteSubmit" value="-" />
                                         </form>
                                     </td>
