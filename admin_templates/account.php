@@ -128,7 +128,7 @@ if (isset($_POST['userDeleteSubmit'])) {
                           $selected = "";
                         }
                       ?>
-                        <option selected><?php echo $access_level ?></option>
+                        <option <?php echo $selected; ?>><?php echo $access_level ?></option>
                       <?php
                       }
                       ?>
