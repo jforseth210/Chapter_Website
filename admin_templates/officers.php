@@ -35,7 +35,7 @@ if (isset($_POST['officerUpdateSubmit'])) {
 
     //The images are saved as officer_title.ext, so if the officer's postition is
     //changed, the filename needs to change with them.
-    rename("images/officers/" . $officerArray["officer_title"], "images/officers/" . $officerArray["officer_title"]);
+    rename("images/officers/" . $officerArray["officer_title"] . "." . $currentOfficer["officer_image_ext"], "images/officers/" . $officerArray["officer_title"]) . "." . $currentOfficer["officer_image_ext"];
 
 
     $officerArray['officer_image_ext'] = $oldOfficerArray['officer_image_ext'];
