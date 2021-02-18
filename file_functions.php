@@ -24,11 +24,6 @@ function savePhoto($photo, $target_file)
         $uploadOk = 0;
     }
 
-    // Check file size
-    /*if ($photo["size"] > 500000) {
-    echo "Sorry, your file is too large.";
-    $uploadOk = 0;
-    }*/
 
     // Allow certain file formats
     $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
