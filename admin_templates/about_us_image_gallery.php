@@ -61,7 +61,7 @@ if (isset($_POST['aboutUsPhotoCardsReorderSubmit'])) {
             $currentAboutUsPhoto = $aboutUsPhotoArray[$aboutUsPhoto];
             //Create the start of the row, which is also a form.
           ?>
-            <div class="col-md-4 d-flex">
+            <div class="col-md-2 d-flex">
               <div class="card mx-auto w-100 my-5 d-flex zoom">
                 <img id="aboutUsPhoto<?php echo $aboutUsPhoto; ?>" class="fresh-id fresh-for card-img-top" src="<?php echo $currentAboutUsPhoto["path"]; ?>">
 

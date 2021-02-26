@@ -81,6 +81,7 @@ function newRow(parentId, row) {
     //Find the parent element, amd make a copy of it's last child.
     var parentElement = document.getElementById(parentId);
     var newChild = parentElement.lastElementChild.cloneNode(true);
+    console.log(newChild);
 
     //Automatically rename the form and submit buttons:
     newChild.getElementsByClassName("submit-button")[0].name = idPrefix + "NewSubmit";
@@ -134,7 +135,7 @@ function newRow(parentId, row) {
     }
 
     //Create the element
-    parentElement.appendChild(newChild);
+    //parentElement.appendChild(newChild);
 
   switch (parentId) {
     case "officerCards":
@@ -223,7 +224,7 @@ function newRow(parentId, row) {
     erasableInputs[i].value = "";
     erasableInputs[i].setAttribute("form", "new" + idPrefix + "Form");
   }
-
+  console.log(newChild);
   //Create the element
   parentElement.appendChild(newChild);
 }
