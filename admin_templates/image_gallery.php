@@ -81,7 +81,7 @@ if (isset($_POST['PhotoCardsReorderSubmit'])) {
                 <div class="mt-auto">
                   <div role="group" class="btn-group w-100 mx-auto mt-auto">
 
-                    <input form="Photo<?php echo $Photo; ?> Delete" class="new-disable btn btn-danger mx-auto" type=submit name="PhotoDeleteSubmit" value="Delete" />
+                    <input form="Photo<?php echo $Photo; ?>Delete" class="new-disable btn btn-danger mx-auto" type=submit name="PhotoDeleteSubmit" value="Delete" />
 
                     <input form="Photos<?php echo $Photo; ?>imagechange" name="photoSubmit" type="submit" value="Save" class="submit-button btn btn-primary" />
 
