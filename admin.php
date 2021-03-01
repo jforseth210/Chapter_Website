@@ -41,7 +41,6 @@ require_once("admin_templates/head.php");
     //Javascript
     require_once("admin_templates/scripts.php");
     require_once("alert.php");
-    echoToAlert("Hello!");
     require_once("file_functions.php");
 
     //Navbar and header
