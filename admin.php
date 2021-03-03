@@ -22,27 +22,9 @@ require_once("admin_templates/head.php");
 ?>
 
 <body>
-    <div class="modal fade in" id="alert-modal" tabindex="-2" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Information:</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p id="alert-modal-alert"></p>
-                </div>
-            </div>
-        </div>
-    </div>
     <?php
-    //Javascript
-    require_once("admin_templates/scripts.php");
-    require_once("alert.php");
     require_once("file_functions.php");
-
+    require_once("alert.php");
     //Navbar and header
     require_once("admin_templates/header.php");
     //About page editor
@@ -75,6 +57,9 @@ require_once("admin_templates/head.php");
 
     //Contact information editor
     require_once("admin_templates/contact.php");
+
+    //Javascript
+    require_once("admin_templates/scripts.php");
 
 
 
