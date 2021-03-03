@@ -89,7 +89,7 @@ if (isset($_POST['officerCardsReorderSubmit'])) {
                         $currentOfficer = $officerArray[$officer];
                         //Create the start of the row, which is also a form.
                         ?>
-                        <div class="col-md-2 d-flex">
+                        <div class="col-lg-3 col-md-4 col-sm-6 d-flex">
                                     <div class="card mx-auto w-100 my-5 d-flex zoom">
                                     <img id="officerImage<?php echo $officer; ?>" class="fresh-id fresh-for card-img-top" src="images/officers/<?php echo ($currentOfficer["officer_title"] . "." . $currentOfficer["officer_image_ext"]);?>">
                                     <form role='form' id="officers<?php echo $officer; ?>imagechange" 

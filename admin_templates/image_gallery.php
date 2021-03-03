@@ -53,7 +53,7 @@ if (isset($_POST['PhotoCardsReorderSubmit'])) {
           for ($Photo = 0; $Photo <= sizeof($PhotoArray) - 1; $Photo++) {
             $currentPhoto = $PhotoArray[$Photo];
           ?>
-            <div class="col-md-2 d-flex">
+            <div class="col-lg-3 col-md-4 col-sm-6 d-flex">
               <div class="card mx-auto w-100 my-5 d-flex zoom">
                 <img id="photosPhoto<?php echo $Photo; ?>" class="fresh-id fresh-for card-img-top" src="<?php echo $currentPhoto["path"]; ?>">
                 <form role='form' id="Photos<?php echo $Photo; ?>imagechange" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>#photos' method="POST" enctype="multipart/form-data">
