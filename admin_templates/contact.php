@@ -25,6 +25,7 @@ if (isset($_POST['contactInfoNewSubmit'])) {
         "contact_info" => $contactInfo
     );
     addNewRowJSON($newContactArray, "contactInfoText.json");
+    echoToAlert($contactName . " added successfully.");
 }
 
 if (isset($_POST['contactInfoUpdateSubmit'])) {
@@ -49,6 +50,7 @@ if (isset($_POST['contactInfoUpdateSubmit'])) {
     );
 
     updateRowJSON($rowToUpdate, $newContactArray, "contactInfoText.json");
+    echoToAlert($contactName . " updated successfully.");
 }
 
 if (isset($_POST['contactInfoDeleteSubmit'])) {
@@ -56,6 +58,7 @@ if (isset($_POST['contactInfoDeleteSubmit'])) {
     $rowToDelete = intVal($_POST['row_num']);
 
     deleteRowJSON($rowToDelete, "contactInfoText.json");
+    echoToAlert("Contact deleted successfully.");
 }
 if (isset($_POST['contactInfoMoveSubmit'])) {
     //Get the row number of the contact being modified

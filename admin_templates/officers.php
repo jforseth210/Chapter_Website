@@ -14,6 +14,7 @@ if (isset($_POST['officerNewSubmit'])) {
     );
 
     addNewRowJSON($officerArray, "officers.json");
+    echoToAlert($officerName . " added successfully");
 }
 
 if (isset($_POST['officerUpdateSubmit'])) {
@@ -40,6 +41,7 @@ if (isset($_POST['officerUpdateSubmit'])) {
 
     $officerArray['officer_image_ext'] = $oldOfficerArray['officer_image_ext'];
     updateRowJSON($rowToUpdate, $officerArray, "officers.json");
+    echoToAlert($officerName . " updated successfully");
 }
 
 if (isset($_POST['officerDeleteSubmit'])) {

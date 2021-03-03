@@ -5,6 +5,7 @@ if (isset($_POST['calendarEmbedSubmit'])) {
         $aboutFile = fopen("../data/calendarEmbedCode.txt", "w");
         fwrite($aboutFile, $calendarEmbedCode);
         fclose($aboutFile);
+        echoToAlert("Calendar URL changed successfully");
 }
 ?>
 <section id="calendar">

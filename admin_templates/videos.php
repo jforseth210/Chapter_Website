@@ -22,6 +22,7 @@ if (isset($_POST['videoNewSubmit'])) {
         "video_url" => $videoURL
     );
 
+    echoToAlert("Video added sucessfully");
     addNewRowJSON($videoArray, "videos.json");
 }
 
@@ -42,6 +43,7 @@ if (isset($_POST['videoUpdateSubmit'])) {
         "video_url" => $videoURL
     );
 
+    echoToAlert("Video updated sucessfully");
     updateRowJSON($rowToUpdate, $videoArray, "videos.json");
 }
 
@@ -49,6 +51,7 @@ if (isset($_POST['videoDeleteSubmit'])) {
     //Get the row number of the video being modified
     $rowToDelete = intVal($_POST['row_num']);
 
+    echoToAlert("Video deleted sucessfully");
     deleteRowJSON($rowToDelete, "videos.json");
 }
 if (isset($_POST['videoMoveSubmit'])) {

@@ -32,6 +32,7 @@ if (isset($_POST['PhotoDeleteSubmit'])) {
   $rowToDelete = intVal($_POST['row_num']);
   echo $rowToDelete;
   deleteRowJSON($rowToDelete, "ImageGallery.json");
+  echoToAlert("Photo deleted successfully");
 }
 if (isset($_POST['PhotoMoveSubmit'])) {
   //Get the row number of the officer being modified

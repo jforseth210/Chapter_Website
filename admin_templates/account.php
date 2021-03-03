@@ -13,13 +13,14 @@ if (isset($_POST['change_password_submit'])) {
           $user["password_hash"] = password_hash($new_password, PASSWORD_DEFAULT);
           updateRowJSON($i, $user, "users.json");
         } else {
-          echo ("Old password is incorrect");
+          echoToAlert ("Old password is incorrect");
         }
       }
     }
   } else {
-    echo ("Passwords do not match!");
+    echoToAlert ("Passwords do not match!");
   }
+  echoToAlert("Password changed");
 }
 
 
@@ -47,6 +48,7 @@ if (isset($_POST['userUpdateSubmit'])) {
   );
 
   updateRowJSON($rowToUpdate, $userArray, "users.json");
+  echoToAlert($username . " updated successfully");
 }
 
 
@@ -67,6 +69,7 @@ if (isset($_POST['userNewSubmit'])) {
   print_r($userArray);
 
   addNewRowJSON($userArray, "users.json");
+  echoToAlert($username . "'s password changed successfully");
 }
 
 
@@ -75,6 +78,7 @@ if (isset($_POST['userDeleteSubmit'])) {
   $rowToDelete = intVal($_POST['row_num']);
 
   deleteRowJSON($rowToDelete, "users.json");
+  echoToAlert("User deleted successfully");
 }
 ?>
 <section id="accounts">

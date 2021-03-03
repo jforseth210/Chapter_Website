@@ -5,6 +5,7 @@ if (isset($_POST['aboutUsSubmit'])) {
     $aboutFile = fopen("../data/aboutUsText.txt", "w");
     fwrite($aboutFile, $aboutUsText);
     fclose($aboutFile);
+    echoToAlert("About Us updated successfully");
 }
 ?>
 <section id="about">

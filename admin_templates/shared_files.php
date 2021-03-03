@@ -13,6 +13,7 @@ if (isset($_POST['googleDriveEmbedSubmit'])) {
     $writeString = $googleDriveEmbedCode . "|" . $driveViewTypeConversion[$viewType];
     fwrite($googleDriveFile, $writeString);
     fclose($googleDriveFile);
+    echoToAlert("Folder URL sucessfully updated");
 }
 ?>
 <section id="shared-files">

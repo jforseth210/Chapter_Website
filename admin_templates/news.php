@@ -10,6 +10,7 @@ if (isset($_POST['newsNewSubmit'])) {
         "news_article" => $newsArticle
     );
     addNewRowJSON($newsArray, "news.json");
+    echoToAlert("Article added successfully");
 }
 
 if (isset($_POST['newsUpdateSubmit'])) {
@@ -25,12 +26,14 @@ if (isset($_POST['newsUpdateSubmit'])) {
     );
 
     updateRowJSON($rowToUpdate, $newsArray, "news.json");
+    echoToAlert("Article updated successfully");
 }
 if (isset($_POST['newsDeleteSubmit'])) {
     //Get the row number of the news being modified
     $rowToDelete = intVal($_POST['row_num']);
 
     deleteRowJSON($rowToDelete, "news.json");
+    echoToAlert("Article deleted successfully");
 }
 if (isset($_POST['newsMoveSubmit'])) {
     //Get the row number of the news being modified
