@@ -1,6 +1,4 @@
 <?php
-//Function from internet to reorder array.
-require_once("array_shove.php");
 /*
 Takes a file uploaded via a form, and
 saves it to the path specified in the
@@ -90,13 +88,6 @@ function writeArrayToJSON($writeArray, $filename)
     $writeFile = fopen("../data/" . $filename, "w");
     fwrite($writeFile, $writeString);
     fclose($writeFile);
-}
-
-function arrayMoveUpDownJSON($filename, $rowToMove, $direction)
-{
-    $originalArray = readArrayFromJSON($filename);
-    $newArray = array_shove($originalArray, $rowToMove, $direction);
-    writeArrayToJSON($newArray, $filename);
 }
 
 function reorderArrayJSON($filename, $oldIndex, $newIndex){

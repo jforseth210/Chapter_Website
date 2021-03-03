@@ -42,12 +42,6 @@ if (isset($_POST['resourceDeleteSubmit'])) {
     echoToAlert("Resource deleted successfully");
     deleteRowJSON($rowToDelete, "resources.json");
 }
-if (isset($_POST['resourceMoveSubmit'])) {
-    //Get the row number of the resource being modified
-    $rowToMove = intVal($_POST['row_num']);
-    $direction = $_POST['direction'];
-    arrayMoveUpDownJSON("resources.json", $rowToMove, $direction);
-}
 if (isset($_POST['resourceCardsReorderSubmit'])) {
     $old_index = intVal($_POST['old_index']);
     $new_index = $_POST['new_index'];

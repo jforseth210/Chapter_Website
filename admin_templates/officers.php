@@ -50,13 +50,6 @@ if (isset($_POST['officerDeleteSubmit'])) {
 
     deleteRowJSON($rowToDelete, "officers.json");
 }
-if (isset($_POST['officerMoveSubmit'])) {
-    //Get the row number of the officer being modified
-    $rowToMove = intVal($_POST['row_num']);
-    $direction = $_POST['direction'];
-    arrayMoveUpDownJSON("officers.json", $rowToMove, $direction);
-}
-//
 if (isset($_POST["officerImageSubmit"])) {
     //Get the data
     $officerImage = $_FILES['officerImage'];

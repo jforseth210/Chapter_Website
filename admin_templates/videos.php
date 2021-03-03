@@ -54,12 +54,6 @@ if (isset($_POST['videoDeleteSubmit'])) {
     echoToAlert("Video deleted sucessfully");
     deleteRowJSON($rowToDelete, "videos.json");
 }
-if (isset($_POST['videoMoveSubmit'])) {
-    //Get the row number of the video being modified
-    $rowToMove = intVal($_POST['row_num']);
-    $direction = $_POST['direction'];
-    arrayMoveUpDownJSON("videos.json", $rowToMove, $direction);
-}
 if (isset($_POST['videoTableReorderSubmit'])) {
     $old_index = intVal($_POST['old_index']);
     $new_index = $_POST['new_index'];

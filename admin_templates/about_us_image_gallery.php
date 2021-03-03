@@ -35,12 +35,6 @@ if (isset($_POST['aboutUsPhotoDeleteSubmit'])) {
   deleteRowJSON($rowToDelete, "aboutUsImageGallery.json");
   echoToAlert("Photo deleted successfully");
 }
-if (isset($_POST['aboutUsPhotoMoveSubmit'])) {
-  //Get the row number of the officer being modified
-  $rowToMove = intVal($_POST['row_num']);
-  $direction = $_POST['direction'];
-  arrayMoveUpDownJSON("aboutUsImageGallery.json", $rowToMove, $direction);
-}
 if (isset($_POST['aboutUsPhotoCardsReorderSubmit'])) {
   $old_index = intVal($_POST['old_index']);
   $new_index = $_POST['new_index'];

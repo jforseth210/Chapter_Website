@@ -60,12 +60,6 @@ if (isset($_POST['contactInfoDeleteSubmit'])) {
     deleteRowJSON($rowToDelete, "contactInfoText.json");
     echoToAlert("Contact deleted successfully.");
 }
-if (isset($_POST['contactInfoMoveSubmit'])) {
-    //Get the row number of the contact being modified
-    $rowToMove = intVal($_POST['row_num']);
-    $direction = $_POST['direction'];
-    arrayMoveUpDownJSON("contactInfoText.json", $rowToMove, $direction);
-}
 if (isset($_POST['contactTableReorderSubmit'])) {
     $old_index = intVal($_POST['old_index']);
     $new_index = $_POST['new_index'];

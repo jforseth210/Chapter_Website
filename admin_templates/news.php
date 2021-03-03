@@ -35,12 +35,6 @@ if (isset($_POST['newsDeleteSubmit'])) {
     deleteRowJSON($rowToDelete, "news.json");
     echoToAlert("Article deleted successfully");
 }
-if (isset($_POST['newsMoveSubmit'])) {
-    //Get the row number of the news being modified
-    $rowToMove = intVal($_POST['row_num']);
-    $direction = $_POST['direction'];
-    arrayMoveUpDownJSON("news.json", $rowToMove, $direction);
-}
 if (isset($_POST['newsCardsReorderSubmit'])) {
     $old_index = intVal($_POST['old_index']);
     $new_index = $_POST['new_index'];
