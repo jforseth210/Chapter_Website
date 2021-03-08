@@ -7,7 +7,8 @@ $contactTypeConversion = array(
     "Link" => "https://",
     "Fax" => "fax:"
 );
-//Form submission logic.
+
+//New contact
 if (isset($_POST['contactInfoNewSubmit'])) {
     //Get contact information
     $contactName = $_POST['contactName'];
@@ -28,8 +29,8 @@ if (isset($_POST['contactInfoNewSubmit'])) {
     echoToAlert($contactName . " added successfully.");
 }
 
+//Update existing contact
 if (isset($_POST['contactInfoUpdateSubmit'])) {
-
     //Get the row number of the contact being modified
     $rowToUpdate = intVal($_POST['row_num']);
     //Get contact information
@@ -43,26 +44,37 @@ if (isset($_POST['contactInfoUpdateSubmit'])) {
     //Prevent https://https:// if user enters it.
     $contactInfo = str_replace("https://", "", $contactInfo);
 
+    //Create a new contact array
     $newContactArray = array(
         "contact_name" => $contactName,
         "contact_type" => $contactType,
         "contact_info" => $contactInfo
     );
 
+    //Write to JSON and let the user know it worked
     updateRowJSON($rowToUpdate, $newContactArray, "contactInfoText.json");
     echoToAlert($contactName . " updated successfully.");
 }
 
+//Contact deletion. 
+//NOTE: Index based, duplicate requests may result in
+//unintended deletion. 
 if (isset($_POST['contactInfoDeleteSubmit'])) {
     //Get the row number of the contact being modified
     $rowToDelete = intVal($_POST['row_num']);
 
+    //Delete the row and tell the user
     deleteRowJSON($rowToDelete, "contactInfoText.json");
     echoToAlert("Contact deleted successfully.");
 }
+
+//Reorder contact table
 if (isset($_POST['contactTableReorderSubmit'])) {
+    //Get original index, desired index
     $old_index = intVal($_POST['old_index']);
     $new_index = $_POST['new_index'];
+
+    //Reorder the json file
     reorderArrayJSON("contactInfoText.json", $old_index, $new_index);
 }
 ?>
@@ -88,14 +100,16 @@ if (isset($_POST['contactTableReorderSubmit'])) {
                         for ($contact = 0; $contact <= sizeof($contactArray) - 1; $contact++) {
                             $currentContactArray = $contactArray[$contact];
                             $optionsArray = array_keys($contactTypeConversion);
-
-                            //Create the start of the row, which is also a form.
                         ?>
                             <tr>
+                                <!-- The main form, used for updated/new contacts -->
                                 <form role="form" id="contact<?php echo $contact; ?>" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>#contact" method="POST">
+                                    <!-- Name of the contact. E.G: John Doe, Advisor, or School Phone: -->
                                     <td>
                                         <input form="contact<?php echo $contact; ?>" name="contactName" class="erasable-value form-control" value="<?php echo $currentContactArray['contact_name'] ?>" />
                                     </td>
+
+                                    <!-- The type of contact info. Phone number, email, etc. -->
                                     <td>
                                         <select form="contact<?php echo $contact; ?>" class="form-control erasable-value" name="contactType">
                                             <?php
@@ -109,15 +123,21 @@ if (isset($_POST['contactTableReorderSubmit'])) {
                                             ?>
                                         </select>
                                     </td>
+
+                                    <!-- The contact information itself.-->
                                     <td>
                                         <input name="contactInfo" form="contact<?php echo $contact; ?>" class="erasable-value form-control" value="<?php echo $currentContactArray["contact_info"] ?>" />
                                     </td>
+
+                                    <!-- New contact button -->
                                     <td>
                                         <button type="button" class="new-disable btn btn-success" onclick="newRow('contactTable',<?php echo $contact; ?>);">+</button>
                                         <form role='form' id="contact<?php echo $contact; ?>Delete" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>#contact" . "' method="POST">
                                             <input class="new-disable btn btn-danger" type=submit name="contactInfoDeleteSubmit" value="-" />
                                         </form>
                                     </td>
+
+                                    <!-- Reorder handle -->
                                     <td width="120px">
                                         <div class="btn btn-secondary handle">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-move" viewBox="0 0 16 16">
@@ -125,10 +145,14 @@ if (isset($_POST['contactTableReorderSubmit'])) {
                                             </svg>
                                         </div>
                                     </td>
+                                    
+                                    <!-- Indexes used to tell which contact is being modified -->
                                     <input hidden name=row_num form="contact<?php echo $contact; ?>" value="<?php echo $contact; ?>">
                                     <input hidden name=row_num form="contact<?php echo $contact; ?>Delete" value="<?php echo $contact; ?>">
                                     <input hidden name=row_num form="contact<?php echo $contact; ?>MoveUp" value="<?php echo $contact; ?>">
                                     <input hidden name=row_num form="contact<?php echo $contact; ?>MoveDown" value="<?php echo $contact; ?>">
+                                    
+                                    <!-- Save button -->
                                     <td>
                                         <input form="contact<?php echo $contact; ?>" class="btn btn-primary submit-button" type=submit name="contactInfoUpdateSubmit" value="Save" />
                                     </td>

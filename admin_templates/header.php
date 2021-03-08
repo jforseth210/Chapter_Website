@@ -47,7 +47,7 @@
 </nav>
 <header class="bg-ffablue text-white">
     <div class="container text-center">
-        <h1>Administrator Tools</h1>
-        <p class="lead">Tools to make updating and maintaining fairfieldffa.org a little easier.</p>
+        <h1>Administrator Page</h1>
+        <p class="lead">Update and Maintain FairfieldFFA.org</p>
     </div>
 </header>

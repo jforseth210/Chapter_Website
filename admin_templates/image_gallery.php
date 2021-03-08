@@ -1,42 +1,66 @@
-i<?php
+<?php
+//Add a new photo
 if (isset($_POST["photosNewSubmit"])) {
+  //Read the form data
   $photo = $_FILES['photo'];
 
+  //Figure out where to save it
   $imageFileType = strtolower(pathinfo($photo["name"], PATHINFO_EXTENSION));
-
   $target_dir = "images/gallery/";
   $target_file = $target_dir . basename($photo["name"]);
+
+  //Create a new photo array for the 
+  //JSON file
   $PhotoArray = array(
     "path" => $target_file
   );
-  AddNewRowJSON($PhotoArray, "ImageGallery.json");
+
+  //Save it, update the JSON file,
+  //and tell the user
   savePhoto($photo, $target_file);
+  AddNewRowJSON($PhotoArray, "ImageGallery.json");
+  echoToAlert("Photo added successfully");
 }
+
+//Replace an existing photo
 if (isset($_POST["photoSubmit"])) {
+  //Read form data
   $photo = $_FILES['photo'];
   $rowToUpdate = intVal($_POST['row_num']);
 
+  //Figure out where to save it 
   $imageFileType = strtolower(pathinfo($photo["name"], PATHINFO_EXTENSION));
-
-  //Save as images/aboutUsPhotos/nameOfOffice.fileExtension
   $target_dir = "images/gallery/";
   $target_file = $target_dir . basename($photo["name"]);
+
+  //Create a new photo in JSON
   $aboutUsPhotoArray = array(
     "path" => $target_file
   );
-  updateRowJSON($rowToUpdate, $aboutUsPhotoArray, "ImageGallery.json");
+
+  //Save the file, replace the old path in JSON, and tell the user
   savePhoto($photo, $target_file);
+  updateRowJSON($rowToUpdate, $aboutUsPhotoArray, "ImageGallery.json");
+  echoToAlert("Photo replaced successfully");
 }
+
+//Delete a photo. Caution: Based on index
 if (isset($_POST['PhotoDeleteSubmit'])) {
-  //Get the row number of the officer being modified
+  //Get the row number
   $rowToDelete = intVal($_POST['row_num']);
-  echo $rowToDelete;
+
+  //Delete it
   deleteRowJSON($rowToDelete, "ImageGallery.json");
   echoToAlert("Photo deleted successfully");
 }
+
+//Rearrange the photos
 if (isset($_POST['PhotoCardsReorderSubmit'])) {
+  //Get the original and new postitions
   $old_index = intVal($_POST['old_index']);
   $new_index = $_POST['new_index'];
+
+  //Reorder the json file
   reorderArrayJSON("ImageGallery.json", $old_index, $new_index);
 }
 ?>
@@ -48,38 +72,45 @@ if (isset($_POST['PhotoCardsReorderSubmit'])) {
         <b>Equally sized, landscape photos recommended, but not required.</b>
         <div id="PhotoCards" class=row>
           <?php
+          //Read and populate the original image data first.
           $PhotoArray = readArrayFromJSON("ImageGallery.json");
-          //Create a table row for each contact
           for ($Photo = 0; $Photo <= sizeof($PhotoArray) - 1; $Photo++) {
             $currentPhoto = $PhotoArray[$Photo];
           ?>
             <div class="col-lg-3 col-md-4 col-sm-6 d-flex">
               <div class="card mx-auto w-100 my-5 d-flex zoom">
+                <!-- Preview image -->
                 <img id="photosPhoto<?php echo $Photo; ?>" class="fresh-id fresh-for card-img-top" src="<?php echo $currentPhoto["path"]; ?>">
+
+                <!-- File selection box -->
                 <form role='form' id="Photos<?php echo $Photo; ?>imagechange" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>#photos' method="POST" enctype="multipart/form-data">
                   <div class="custom-file">
-                    <input type="file" class="new-load-file-function btn-file fresh-id form-control-file" onchange="loadFile(event, 'photosPhoto<?php echo $Photo;?>' )" name="photo" id="customPhoto<?php echo $Photo;?>">
+                    <input type="file" class="new-load-file-function btn-file fresh-id form-control-file" onchange="loadFile(event, 'photosPhoto<?php echo $Photo; ?>' )" name="photo" id="customPhoto<?php echo $Photo; ?>">
 
                     <label class="fresh-for custom-file-label" for="customPhoto<?php echo $Photo; ?>">Choose file</label>
                   </div>
                 </form>
 
+                <!-- Indexes. Which image is changing -->
                 <input hidden name=row_num form="Photos<?php echo $Photo; ?>imagechange" value="<?php echo $Photo; ?>">
-                <input hidden name=row_num form="Photos<?php echo $Photo; ?>MoveUp" value="<?php echo $Photo; ?>">
-                <input hidden name=row_num form="Photos<?php echo $Photo; ?>MoveDown" value="<?php echo $Photo; ?>">
-
-                </form>
                 <input hidden name=row_num form="Photos<?php echo $Photo; ?>" value="<?php echo $Photo; ?>">
                 <input hidden name=row_num form="Photo<?php echo $Photo; ?>Delete" value="<?php echo $Photo; ?>">
+
+                <!-- The form used for deletion. Has a submission button, and a row_num field. -->
                 <form role='form' id="Photo<?php echo $Photo; ?>Delete" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>#photos' method="POST">
                 </form>
+
+                <!-- The delete, save, and new buttons -->
                 <div class="mt-auto">
                   <div role="group" class="btn-group w-100 mx-auto mt-auto">
 
+                    <!-- Deletion button -->
                     <input form="Photo<?php echo $Photo; ?>Delete" class="new-disable btn btn-danger mx-auto" type=submit name="PhotoDeleteSubmit" value="Delete" />
 
+                    <!-- Save button -->
                     <input form="Photos<?php echo $Photo; ?>imagechange" name="photoSubmit" type="submit" value="Save" class="submit-button btn btn-primary" />
 
+                    <!-- New button -->
                     <button type="button" class="new-disable btn btn-success mx-auto" onclick="newRow('PhotoCards',<?php echo $Photo; ?>);">New</button>
                   </div>
                 </div>

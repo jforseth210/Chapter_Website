@@ -1,11 +1,13 @@
 <?php
-//Officers
+//New officer
 if (isset($_POST['officerNewSubmit'])) {
-    //Get officer information
+
+    //Form data
     $officerTitle = $_POST['officerTitle'];
     $officerName = $_POST['officerName'];
     $officerBio = $_POST['officerBio'];
 
+    //Create a new 'officer' from the form data
     $officerArray = array(
         "officer_title" => $officerTitle,
         "officer_name" => $officerName,
@@ -13,10 +15,13 @@ if (isset($_POST['officerNewSubmit'])) {
         "officer_image_ext" => "Image not yet uploaded"
     );
 
+    //Add to the json file and tell the user. 
     addNewRowJSON($officerArray, "officers.json");
     echoToAlert($officerName . " added successfully");
 }
 
+//Update an existing officer
+//(TEXT ONLY, images modified using seperate form)
 if (isset($_POST['officerUpdateSubmit'])) {
     //Get the row number of the officer being modified
     $rowToUpdate = intVal($_POST['row_num']);
@@ -25,25 +30,31 @@ if (isset($_POST['officerUpdateSubmit'])) {
     $officerName = $_POST['officerName'];
     $officerBio = $_POST['officerBio'];
 
+    //Create a new 'offcer' from the form data
     $officerArray = array(
         "officer_title" => $officerTitle,
         "officer_name" => $officerName,
         "officer_bio" => $officerBio
     );
 
+    //Get the officer's original info
+    //(used to rename the image)
     $oldOfficerArray = readArrayFromJSON("officers.json");
     $oldOfficerArray = $oldOfficerArray[$rowToUpdate];
 
-    //The images are saved as officer_title.ext, so if the officer's postition is
-    //changed, the filename needs to change with them.
+    //If the office has changed move rename the photo:
+    //old_officer_title.ext -> new_officer_title.ext
     rename("images/officers/" . $officerArray["officer_title"] . "." . $currentOfficer["officer_image_ext"], "images/officers/" . $officerArray["officer_title"]) . "." . $currentOfficer["officer_image_ext"];
 
-
+    //Since this form doesn't modify the image, leave the extension unchanged    
     $officerArray['officer_image_ext'] = $oldOfficerArray['officer_image_ext'];
+    
+    //Update the file, tell the user
     updateRowJSON($rowToUpdate, $officerArray, "officers.json");
     echoToAlert($officerName . " updated successfully");
 }
 
+//Delete an officer. Caution: Based on index.
 if (isset($_POST['officerDeleteSubmit'])) {
     //Get the row number of the officer being modified
     $rowToDelete = intVal($_POST['row_num']);

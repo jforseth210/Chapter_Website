@@ -238,6 +238,10 @@ function loadFile(event, imageId) {
   image.src = URL.createObjectURL(event.target.files[0]);
 }
 
+//Don't resubmit on reload.
+if (window.history.replaceState) {
+  window.history.replaceState(null, null, window.location.href);
+}
 function checkIfAdminExists(id){
   userAccessLevels = document.getElementsByName("access");
   adminUserExists = false;
