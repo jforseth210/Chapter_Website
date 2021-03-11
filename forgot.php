@@ -5,33 +5,36 @@ session_start();
 //Message displayed to user
 $msg = '';
 require_once("file_functions.php");
+require_once("alert.php");
 $users = readArrayFromJSON("users.json");
 
 //Handle form submission
 if (
   isset($_POST['login']) && !empty($_POST['username'])
-  && !empty($_POST['password'])
 ) {
-  $login_suceeded = false;
-  for ($i = 0; $i < sizeOf($users); $i++) {
-    if (
-      $users[$i]["username"] == $_POST['username'] &&
-      password_verify($_POST['password'], $users[$i]["password_hash"])
-    ) {
-      $_SESSION['valid'] = true;
-      $_SESSION['timeout'] = time();
-      $_SESSION['username'] = $users[$i]["username"];
-      $_SESSION['real_name'] = $users[$i]["real_name"];
-      $_SESSION['access'] = $users[$i]["access"];
-      $login_suceeded = true;
-      header("Location: admin.php");
-      exit();
-    } else {
-      $msg = 'Wrong username or password';
-    }
+  $username = $_POST['username'];
+  $token = getRandomString(16);
+  $resetArray = array(
+    "username" => $username,
+    "token" => $token
+  );
+  addNewRowJSON($resetArray, "reset_tokens.json");
+
+  $link = "https://fairfieldffa.org/resetpassword.php?username=$username&token=$token";
+  echoToAlert($link);
+  mail("jforseth210@gmail.com", "Fairfield FFA Password Reset", "Here's the link to reset your Fairfield FFA password:\n$link");
+}
+//https://www.w3docs.com/snippets/php/how-to-generate-a-random-string-with-php.html
+function getRandomString($n) {
+  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $randomString = '';
+
+  for ($i = 0; $i < $n; $i++) {
+      $index = rand(0, strlen($characters) - 1);
+      $randomString .= $characters[$index];
   }
-} else {
-  $msg = 'Please enter a username and/or password';
+
+  return $randomString;
 }
 ?>
 
@@ -46,7 +49,7 @@ if (
   <meta name="description" content="Website for the Fairfield FFA Chapter.">
   <meta name="author" content="Justin Forseth">
 
-  <title>Login</title>
+  <title>Reset Password</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -81,13 +84,10 @@ if (
       <form class="form-signin" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);
                                                     ?>" method="post">
         <img class="mb-4" src="images/emblem.png" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Reset Password</h1>
         <label for="username" class="sr-only">Username</label>
         <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
-        <label for="password" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" name="login" type="submit">Sign in</button>
-        <a href="forgot.php">Forgot your password?</a>
+        <button class="btn btn-lg btn-primary btn-block" name="login" type="submit">Send Reset Link</button>
         <p class="mt-5 mb-3 text-muted">&copy; Fairfield FFA 2020</p>
       </form>
     </div>
