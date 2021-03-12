@@ -21,8 +21,8 @@ if (
   addNewRowJSON($resetArray, "reset_tokens.json");
 
   $link = "https://fairfieldffa.org/resetpassword.php?username=$username&token=$token";
-  echoToAlert($link);
-  mail("jforseth210@gmail.com", "Fairfield FFA Password Reset", "Here's the link to reset your Fairfield FFA password:\n$link");
+  echoToAlert("A password reset link has been sent to jpark@********.***.**.us");
+  mail("jpark@fairfield.k12.mt.us", "Fairfield FFA Password Reset for $username", "Here's the password reset link for $username:\n$link");
 }
 //https://www.w3docs.com/snippets/php/how-to-generate-a-random-string-with-php.html
 function getRandomString($n) {
