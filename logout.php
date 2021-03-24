@@ -5,6 +5,6 @@
     */
     session_start();
     session_destroy();
-    header("Location: chaptersitewip.php");
+    header("Location: index.php");
     exit();
 ?>
