@@ -65,7 +65,7 @@ if (isset($_POST['resourceCardsReorderSubmit'])) {
                         <div class="col-md-4 d-flex">
                             <div class="card mx-auto w-100 my-5 d-flex zoom">
                                 <img class="card-img-top" src="<?php echo $currentResource["resource_image_url"];?>">
-                                <form role='form' id="resources<?php echo $resource;?>" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>#resources' method=" POST">
+                                <form role='form' id="resources<?php echo $resource;?>" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>#resources' method="POST">
                                 </form>
                                 <h3><input form="resources<?php echo $resource;?>" name="resourceImageURL" class="erasable-value form-control" value="<?php echo $currentResource["resource_image_url"]; ?> " placeholder="Image URL" /></h3>
                                 <h5><input form="resources<?php echo $resource;?>" name="resourceName" class="erasable-value form-control" value="<?php echo $currentResource["resource_name"]; ?> " placeholder="Name" /></h5>
@@ -74,7 +74,7 @@ if (isset($_POST['resourceCardsReorderSubmit'])) {
                                 <input hidden name=row_num form="resources<?php echo $resource;?>" value="<?php echo $resource;?>">
                                 <input hidden name=row_num form="resources<?php echo $resource;?>Delete" value="<?php echo $resource;?>">
 
-                                <form role='form' id="resources<?php echo $resource;?>Delete" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>#resources' method=" POST">
+                                <form role='form' id="resources<?php echo $resource;?>Delete" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>#resources' method="POST">
                                 </form>
                                 <div role="group" class="w-100 btn-group mx-auto mt-auto">
                                     <input form="resources<?php echo $resource;?>Delete" class="new-disable btn btn-danger mx-auto" type=submit name="resourceDeleteSubmit" value="Delete" />

@@ -87,7 +87,7 @@ if (isset($_POST['newsCardsReorderSubmit'])) {
                                     <div role="group" class="btn-group mx-auto mt-auto w-100">
                                         
                                         <!-- Delete button -->
-                                        <form role='form' id="news<?php echo $news; ?>Delete" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>#news' method=" POST">
+                                        <form role='form' id="news<?php echo $news; ?>Delete" action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>#news' method="POST">
                                             <input class="new-disable btn btn-danger mx-auto" type=submit name="newsDeleteSubmit" value="Delete" />
                                         </form>
 
