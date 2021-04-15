@@ -14,7 +14,7 @@ if (isset($_POST['resourceNewSubmit'])) {
         "resource_body" => $resourceBody
     );
     addNewRowJSON($resourceArray, "resources.json");
-    echoToAlert($resourceName . "added successfully");
+    echoToAlert($resourceName . " added successfully");
 }
 
 if (isset($_POST['resourceUpdateSubmit'])) {
@@ -34,7 +34,7 @@ if (isset($_POST['resourceUpdateSubmit'])) {
     );
 
     updateRowJSON($rowToUpdate, $resourceArray, "resources.json");
-    echoToAlert($resourceName . "updated successfully");
+    echoToAlert($resourceName . " updated successfully");
 }
 if (isset($_POST['resourceDeleteSubmit'])) {
     //Get the row number of the resource being modified
