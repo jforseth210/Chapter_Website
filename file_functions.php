@@ -70,8 +70,9 @@ function addNewRowJSON($arrayToAdd, $filename)
     $readArray = readArrayFromJSON($filename);
 
     array_push($readArray, $arrayToAdd);
-
     writeArrayToJSON($readArray, $filename);
+    
+    reorderArrayJSON($filename, sizeof($readArray) - 1, 0);
 };
 
 function readArrayFromJSON($filename)

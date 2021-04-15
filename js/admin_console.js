@@ -226,7 +226,7 @@ function newRow(parentId, row) {
   }
   console.log(newChild);
   //Create the element
-  parentElement.appendChild(newChild);
+  parentElement.insertBefore(newChild,parentElement.children[0]);
 }
 /*
   Takes the id of an image and an onchange event
