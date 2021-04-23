@@ -2,12 +2,14 @@
 //New photo submission
 if (isset($_POST["aboutUsPhotoNewSubmit"])) {
   //Form data
-  $photo = $_FILES['photo'];
+  $photos = $_FILES['photos'];
+  $photos = reArrayFiles($photos);
 
+  for ($i=0; $i < sizeof($photos); $i++) { 
   //Figure out what to call the file
-  $imageFileType = strtolower(pathinfo($photo["name"], PATHINFO_EXTENSION));
+  $imageFileType = strtolower(pathinfo($photos[$i]["name"], PATHINFO_EXTENSION));
   $target_dir = "images/about_us_gallery/";
-  $target_file = $target_dir . basename($photo["name"]);
+  $target_file = $target_dir . basename($photos[$i]["name"]);
   
   //Create a new "photo"
   $aboutUsPhotoArray = array(
@@ -16,9 +18,10 @@ if (isset($_POST["aboutUsPhotoNewSubmit"])) {
 
   //Save the photo, add it to the JSON file, 
   //and let the user know.
-  savePhoto($photo, $target_file);
+  savePhoto($photos[$i], $target_file);
   AddNewRowJSON($aboutUsPhotoArray, "aboutUsImageGallery.json");
-  echoToAlert("Photo added successfully");
+}
+echoToAlert($fileCount . " new photos added successfully");
 }
 
 //Replace existing photo
@@ -71,7 +74,7 @@ if (isset($_POST['aboutUsPhotoCardsReorderSubmit'])) {
     <div class="row">
       <div class="col-lg-12">
         <h2>About Us Images</h2>
-        <b>Equally sized, landscape photos recommended, but not required.</b>
+        <b>Equally sized, landscape photos recommended, but not required. Uploading multiple photos is currently an experimental feature.</b>
         <div id="aboutUsPhotoCards" class=row>
           <?php
           $aboutUsPhotoArray = readArrayFromJSON("aboutUsImageGallery.json");
@@ -88,7 +91,7 @@ if (isset($_POST['aboutUsPhotoCardsReorderSubmit'])) {
                 <form role='form' id="aboutUsPhotos<?php echo $aboutUsPhoto; ?>imagechange" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>#aboutUsPhotos" method="POST" enctype="multipart/form-data">
                   <input hidden name=row_num value="<?php echo $aboutUsPhoto; ?>">
                   <div class="custom-file">
-                    <input type="file" name="photo" class="new-load-file-function fresh-id form-control-file" id="customAboutUsPhoto<?php echo $aboutUsPhoto; ?>" onchange="loadFile(event, 'aboutUsPhoto<?php echo $aboutUsPhoto; ?>')">
+                    <input type="file" name="photos[]" class="new-load-file-function fresh-id form-control-file" id="customAboutUsPhoto<?php echo $aboutUsPhoto; ?>" onchange="loadFile(event, 'aboutUsPhoto<?php echo $aboutUsPhoto; ?>')" multiple>
                     <label class="fresh-for custom-file-label" for="customAboutUsPhoto<?php echo $aboutUsPhoto; ?>">Choose file</label>
                   </div>
                 </form>
