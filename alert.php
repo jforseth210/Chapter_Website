@@ -17,7 +17,6 @@
 //Simple alert for users.
 function echoToAlert($message)
 {
-  echoToConsole("I did something");
   echo "<script>function defer(method) {
     if (window.jQuery) {
       document.getElementById('alert-modal-alert').innerHTML = \"$message\";

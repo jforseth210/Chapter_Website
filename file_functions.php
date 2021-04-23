@@ -11,7 +11,7 @@ function savePhoto($photo, $target_file)
     Upload failed if 0
     */
     $uploadOk = 1;
-
+    print_r($photo);
     // Check if image file is a actual image or fake image
     $check = getimagesize($photo["tmp_name"]);
     if ($check !== false) {
